@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div>
+    <div className="bg-[#26272C] flex flex-col min-h-screen ">
       <Router>
         <App />
       </Router>

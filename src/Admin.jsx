@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Admin from "./components/adminComponents/Admin";
+import Login from "./components/adminComponents/Login";
 export default () => {
   return (
     <div>
       <div >
         <Routes>
 
-        <Route path="*" element={<Admin />} />
+        <Route path="*" element={<Login />} />
 
         </Routes>
       </div>

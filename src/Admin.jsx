@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Admin from "./component/Admin";
+import Admin from "./components/adminComponents/Admin";
 export default () => {
   return (
     <div>

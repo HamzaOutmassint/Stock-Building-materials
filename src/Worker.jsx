@@ -1,6 +1,6 @@
 import React from "react";
 import {  Route, Routes } from "react-router-dom";
-import Worker from "./component/Worker";
+import Worker from "./components/workerComponents/Worker";
 export default () => {
   return (
     <div>

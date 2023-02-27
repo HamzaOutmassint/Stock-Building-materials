@@ -12,28 +12,28 @@ export default function Nav() {
   }
   return (
     <div className="p-4 relative ">
-      <div className="w-full bg-[#1F2025] p-4 rounded-lg flex justify-between">
+      <div className="w-full bg-[#1F2025] p-3 rounded-lg flex justify-between items-center">
         <div className="flex gap-4">
           <div className="">
             <img
               src={Navcontr}
               alt=""
-              className="w-14 bg-[#93FBA4] rounded-full"
+              className="w-12 bg-[#93FBA4] rounded-full"
             />
           </div>
           <div className="flex flex-col text-white">
-            <span className="font-mono font-bold text-xl">
-              salaheddine elfatimi
+            <span className="font-mono font-bold ">
+              Salaheddine elfatimi
             </span>
-            <span className="font-mono font-thin text-md">Worker</span>
+            <span className="font-mono font-thin ">worker</span>
           </div>
         </div>
-        <div>
+        <div className="flex">
           <button onClick={showsetting}>
-            <img src={setting} alt="" className="w-14 " />
+            <img src={setting} alt="" className="w-12 " />
           </button>
           <div
-            className={`absolute right-10 space-y-4  bg-[#4C4D53] p-6 rounded-lg  ${
+            className={`absolute right-10 -bottom-40 space-y-4  bg-[#4C4D53] p-6 rounded-lg  ${
               show == false ? "hidden" : "block"
             }`}
           >

@@ -1,6 +1,6 @@
 import React from "react";
 import {  Route, Routes } from "react-router-dom";
-import Worker from "./components/workerComponents/Worker";
+import Controller from "./components/workerComponents/Controller";
 export default () => {
   return (
     <div>
@@ -9,7 +9,7 @@ export default () => {
 
         <Routes>
 
-        <Route exact path="*" element={<Worker />} />
+        <Route exact path="*" element={<Controller />} />
 
         </Routes>
       </div>

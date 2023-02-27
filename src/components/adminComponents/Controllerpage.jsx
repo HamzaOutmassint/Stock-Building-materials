@@ -6,13 +6,13 @@ export default function Controllerpage() {
       <Nav />
       <div className="p-4">
         <section>
-            <div>
+            <div className="flex justify-end gap-10">
                 <div>
-                    <input type="search" />
+                    <input className="bg-[#3C3D42] text-white p-3 h-10 rounded-xl w-56" type="text" placeholder="Search for ... " />
                 </div>
-                <div>
-                    <label htmlFor="date">Date : </label>
-                    <input type="date"  id="date" />
+                <div className="flex gap-4 items-center">
+                    <label htmlFor="date" className="text-white font-mono font-semibold text-lg">Date : </label>
+                    <input className="bg-[#3C3D42] p-3 h-10 w-56 text-center rounded-xl text-white" type="date"  id="date" />
                 </div>
             </div>
         </section>

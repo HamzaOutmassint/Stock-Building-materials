@@ -10,11 +10,11 @@ export default function Chose_worker_bloc() {
     console.log(chose)
   return (
     <div className="p-8">
-      <div className="grid  grid-cols-1 md:grid-cols-2   gap-20">
+      <div className="grid  grid-cols-1 md:grid-cols-2    gap-20">
         <button
           onClick={(e) => setChose(e.currentTarget.id)}
           id="Controller"
-          className=" bg-[#1F2025] space-y-10 py-36 rounded-lg shadow-2xl"
+          className=" bg-[#1F2025] space-y-10  rounded-lg shadow-2xl"
         >
           <div className="w-72 m-auto">
             <img src={Controler} alt="" />

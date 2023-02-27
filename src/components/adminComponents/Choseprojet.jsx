@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/Logo.svg";
+
 export default function Choseprojet() {
   const [projet, setProjet] = useState("");
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ export default function Choseprojet() {
   projet==""?"":navigate("../Chose_worker_bloc");
   
   return (
-    <div className="p-4   ">
+    <div className="p-4">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1  lg:pt-24  gap-4 ">
         <button
           onClick={(e) => setProjet(e.currentTarget.id)}
@@ -22,6 +23,7 @@ export default function Choseprojet() {
             <span>Realtoric</span>
           </div>
         </button>
+
         <button
           onClick={(e) => setProjet(e.currentTarget.id)}
           id="atlas"

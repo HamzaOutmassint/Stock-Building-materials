@@ -5,7 +5,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   function handelSbmite(){
-    (username=="root"&&password=="1234")?navigate("./Choseprojet"):alert("errur");
+    (username=="root"&&password=="1234")?navigate("../Choseprojet"):alert("errur");
     
     
   }

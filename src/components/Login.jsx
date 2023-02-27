@@ -15,8 +15,12 @@ export default function Login() {
       navigate("/worker")
     }else{
       alert("errur");
+<<<<<<< HEAD
     }
   }
+=======
+  }}
+>>>>>>> 2f71ff0a5b2708d54e68fe77cbcfa89becc96cec
 
   return (
     <div className=" flex  justify-center items-center h-screen text-white p-4">

@@ -15,7 +15,7 @@ export default function Login() {
       navigate("/worker")
     }else{
       alert("errur");
-  }
+  }}
 
   return (
     <div className=" flex  justify-center items-center h-screen text-white p-4">

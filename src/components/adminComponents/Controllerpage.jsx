@@ -8,7 +8,7 @@ export default function Controllerpage() {
   return (
     <div>
       <Nav />
-      <div className="container">
+      <div className="p-2">
         <section>
           <div className="flex  justify-end gap-10">
             <div>

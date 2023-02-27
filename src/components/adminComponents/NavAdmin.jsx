@@ -4,6 +4,8 @@ import setting from "../../assets/setting.png";
 import logout from "../../assets/logout.png";
 import user from "../../assets/user.png";
 import adduser from "../../assets/add-user.png";
+import { NavLink } from "react-router-dom";
+
 
 export default function Nav() {
   const [show, setShow] = useState(false);
@@ -11,7 +13,7 @@ export default function Nav() {
     setShow(!show);
   }
   return (
-    <div className="p-4 relative ">
+    <div className="p-2 relative ">
       <div className="w-full bg-[#1F2025] p-3 rounded-lg flex justify-between items-center">
         <div className="flex gap-4">
           <div className="">
@@ -25,7 +27,7 @@ export default function Nav() {
             <span className="font-mono font-bold ">
               Salaheddine elfatimi
             </span>
-            <span className="font-mono font-thin ">worker</span>
+            <span className="font-mono font-thin ">admin</span>
           </div>
         </div>
         <div className="flex">
@@ -37,18 +39,19 @@ export default function Nav() {
               show == false ? "hidden" : "block"
             }`}
           >
-            <div className="flex items-center gap-2">
+            <NavLink  className="flex items-center gap-2">
               <img src={user} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Votre compte
               </span>
-            </div>
-            <div className="flex items-center gap-2">
+            </NavLink>
+            
+            <NavLink to={"../Add_new_worker"} className="flex items-center gap-2">
               <img src={adduser} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Add new worker
               </span>
-            </div>
+            </NavLink>
             <div className="flex items-center gap-2">
               <img src={logout} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">

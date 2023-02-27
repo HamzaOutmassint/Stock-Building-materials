@@ -15,6 +15,7 @@ export default function Login() {
       navigate("/worker")
     }else{
       alert("errur");
+    }
   }
 
   return (

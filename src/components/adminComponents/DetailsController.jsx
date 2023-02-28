@@ -11,7 +11,7 @@ export default function DetailsController() {
     <div>
       <Nav />
       <div className="p-4  ">
-        <section className="pb-2 flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between gap-2">
+        <section className="pb-2 flex flex-col md:items-center space-y-4 md:space-y-0 md:flex-row md:justify-between gap-2">
           <div className="flex items-center gap-6">
             <div>
               <select

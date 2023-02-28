@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
+import { NavLink } from "react-router-dom";
 
 function createData(name, calories, fat, carbs, See_detail) {
   return {
@@ -44,7 +45,7 @@ const rows = [
   ),
   createData("hamza", "EE111", "0602314804", "Electricity", "see more details"),
   createData("hgdhgh", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("kjsd", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("kjsd", "EE112", "0602314804", "Electricity", "see more details"),
   createData("nksd", "EE111", "0602314804", "Electricity", "see more details"),
   createData("bjsdu", "EE111", "0602314804", "Electricity", "see more details"),
 ];
@@ -225,8 +226,8 @@ export default function AdminTable() {
                         scope="row"
                         style={{ paddingLeft: "33px", color: "#fff" }}
                       >
-                        {" "}
-                        {row.name}{" "}
+                      
+                        {row.name}
                       </TableCell>
                       <TableCell align="right" style={{ color: "#fff" }}>
                         {row.calories}
@@ -241,7 +242,7 @@ export default function AdminTable() {
                         align="right"
                         style={{ paddingRight: "45px", color: "#fff" }}
                       >
-                        <button>{row.See_detail}</button>
+                        <NavLink to={"../DetailsController"}>{row.See_detail}</NavLink>
                       </TableCell>
                     </TableRow>
                   );

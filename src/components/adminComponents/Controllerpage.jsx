@@ -9,14 +9,14 @@ export default function Controllerpage() {
   console.log(searchnmame);
 
   return (
-    <div>
+    <div className=" ">
       <Nav />
-      <div className="p-2">
+      <div className="p-2  ">
         <section className="pb-2">
-          <div className="flex  justify-end gap-10">
+          <div className="flex  sm:justify-end gap-6">
             <div>
               <input
-                className="bg-[#3C3D42] text-white p-3 h-11 rounded-xl w-64"
+                className="bg-[#3C3D42]  px-10 h-9 w-full 'bg-[#4B484C] rounded-xl focus:outline none p-1 text-white text-xs"
                 type="text"
                 onChange={(e) => setSearchname(e.target.value)}
                 placeholder="Search for ... "
@@ -29,7 +29,7 @@ export default function Controllerpage() {
                 id=""
               
                 onChange={(e) => setSearchdate(e.target.value)}
-                className="bg-[#3C3D42] p-3 h-11 w-64 text-center rounded-xl font-mono  font-medium  text-white"
+                className="bg-[#3C3D42]  px-10 h-9 w-full 'bg-[#4B484C] rounded-xl focus:outline none p-1 text-white text-xs"
               >
                 <option selected >
                   All date
@@ -41,8 +41,10 @@ export default function Controllerpage() {
             </div>
           </div>
         </section>
-        
+        <div className=" ">
         <AdminTable/>
+        </div>
+       
       </div>
     </div>
   );

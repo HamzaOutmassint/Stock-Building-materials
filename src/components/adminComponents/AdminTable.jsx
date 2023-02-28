@@ -69,25 +69,25 @@ const headCells = [
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'Designation',
+    label: 'Full Name',
   },
   {
     id: 'calories',
     numeric: true,
     disablePadding: false,
-    label: 'quantity_Completed',
+    label: 'Identity card Number',
   },
   {
     id: 'fat',
     numeric: true,
     disablePadding: false,
-    label: 'the_remaining_quantity',
+    label: 'phone number',
   },
   {
     id: 'carbs',
     numeric: true,
     disablePadding: false,
-    label: 'Number_of_Persons',
+    label: 'specialty',
   }
 ];
 
@@ -113,8 +113,8 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Designation" ? {"paddingLeft":"33px","color":"#fff"} 
-                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","color":"#fff"} : {"color":"#fff"}
+                headCell.label === "Full Name" ? {"paddingLeft":"33px","color":"#fff"} 
+                : headCell.label === 'specialty' ? {"paddingRight":"33px","color":"#fff"} : {"color":"#fff"}
               }
             >
               {headCell.label}

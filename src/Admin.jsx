@@ -8,7 +8,7 @@ import Add_new_worker from "./components/adminComponents/Add_new_worker"
 export default () => {
   return (
     <div>
-      <div >
+      <div className="">
         <Routes>
 
         {/* <Route path="*" element={<Login />} /> */}

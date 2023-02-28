@@ -6,7 +6,6 @@ import user from "../../assets/user.png";
 import adduser from "../../assets/add-user.png";
 import { NavLink } from "react-router-dom";
 
-
 export default function Nav() {
   const [show, setShow] = useState(false);
   function showsetting() {
@@ -24,9 +23,7 @@ export default function Nav() {
             />
           </div>
           <div className="flex flex-col text-white">
-            <span className="font-mono font-bold ">
-              Salaheddine elfatimi
-            </span>
+            <span className="font-mono font-bold ">Salaheddine elfatimi</span>
             <span className="font-mono font-thin ">admin</span>
           </div>
         </div>
@@ -35,29 +32,32 @@ export default function Nav() {
             <img src={setting} alt="" className="w-12 " />
           </button>
           <div
-            className={`absolute right-10 -bottom-40 space-y-4  bg-[#4C4D53] p-6 rounded-lg  ${
+            className={`absolute right-10 -bottom-40 space-y-4 z-50  bg-[#4C4D53] p-6 rounded-lg  ${
               show == false ? "hidden" : "block"
             }`}
           >
-            <NavLink  className="flex items-center gap-2">
+            <NavLink className="flex items-center gap-2">
               <img src={user} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Votre compte
               </span>
             </NavLink>
-            
-            <NavLink to={"../Add_new_worker"} className="flex items-center gap-2">
+
+            <NavLink
+              to={"../Add_new_worker"}
+              className="flex items-center gap-2"
+            >
               <img src={adduser} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Add new worker
               </span>
             </NavLink>
-            <div className="flex items-center gap-2">
+            <NavLink to="/" className="flex items-center gap-2">
               <img src={logout} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Déconnexion
               </span>
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>

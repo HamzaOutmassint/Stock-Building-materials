@@ -35,20 +35,20 @@ export default function Nav() {
             }`}
           >
             <NavLink  className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
-              <img src={user} alt="" className="w-8" />
+              <img src={user} alt="" className="w-6" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Votre compte
               </span>
             </NavLink>
             
             <NavLink to={"../Add_new_worker"} className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
-              <img src={adduser} alt="" className="w-8" />
+              <img src={adduser} alt="" className="w-6" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Add new worker
               </span>
             </NavLink>
             <NavLink to="/" className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
-              <img src={logout} alt="" className="w-8" />
+              <img src={logout} alt="" className="w-6" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Déconnexion
               </span>

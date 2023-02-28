@@ -218,23 +218,23 @@ export default function AdminTable() {
                         component="th"
                         id={labelId}
                         scope="row"
-                        style={{ paddingLeft: "33px", color: "#fff" }}
+                        style={{ paddingLeft: "33px", color: "black" }}
                       >
                       
                         {row.name}
                       </TableCell>
-                      <TableCell align="right" style={{ color: "#fff" }}>
+                      <TableCell align="right" style={{ color: "black" }}>
                         {row.calories}
                       </TableCell>
-                      <TableCell align="right" style={{ color: "#fff" }}>
+                      <TableCell align="right" style={{ color: "black" }}>
                         {row.fat}
                       </TableCell>
-                      <TableCell align="right" style={{ color: "#fff" }}>
+                      <TableCell align="right" style={{ color: "black" }}>
                         {row.carbs}
                       </TableCell>
                       <TableCell
                         align="right"
-                        style={{ paddingRight: "45px", color: "#fff" }}
+                        style={{ paddingRight: "45px", color: "black" }}
                       >
                         <NavLink to={"../DetailsController"}>{row.See_detail}</NavLink>
                       </TableCell>

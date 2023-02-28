@@ -24,16 +24,16 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Amal', 1, 3.7, 67),
-  createData('Donut', 452, 25.0, 51),
-  createData('Eclair', 262, 16.0, 24),
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Gingerbread', 356, 16.0, 49),
-  createData('hamza', 1, 3.7, 67),
-  createData('hgdhgh', 452, 25.0, 51),
-  createData('kjsd', 262, 16.0, 24),
-  createData('nksd', 159, 6.0, 24),
-  createData('bjsdu', 356, 16.0, 49),
+  createData('Amal', "EE111", "0602314804", "Electricity" ),
+  createData('Donut', "EE111", "0602314804", "Electricity"),
+  createData('Eclair', "EE111", "0602314804", "Electricity"),
+  createData('Frozen yoghurt',"EE111", "0602314804", "Electricity"),
+  createData('Gingerbread',"EE111", "0602314804", "Electricity"),
+  createData('hamza', "EE111", "0602314804", "Electricity"),
+  createData('hgdhgh', "EE111", "0602314804", "Electricity"),
+  createData('kjsd', "EE111", "0602314804", "Electricity"),
+  createData('nksd', "EE111", "0602314804", "Electricity"),
+  createData('bjsdu', "EE111","0602314804", "Electricity"),
 ];
 
 function descendingComparator(a, b, orderBy) {

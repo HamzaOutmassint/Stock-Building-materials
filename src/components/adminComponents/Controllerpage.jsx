@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import AdminTable from "./AdminTable";
 import Nav from "./NavAdmin";
+
 export default function Controllerpage() {
   const [searchnmame, setSearchname] = useState("");
   const [searchdate, setSearchdate] = useState("");
   console.log(searchdate);
   console.log(searchnmame);
+
   return (
     <div>
       <Nav />
       <div className="p-2">
-        <section>
+        <section className="pb-2">
           <div className="flex  justify-end gap-10">
             <div>
               <input
@@ -38,6 +41,8 @@ export default function Controllerpage() {
             </div>
           </div>
         </section>
+        
+        <AdminTable/>
       </div>
     </div>
   );

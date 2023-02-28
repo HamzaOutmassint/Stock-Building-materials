@@ -113,8 +113,8 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Designation" ? {"paddingLeft":"33px"} 
-                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px"} : null
+                headCell.label === "Designation" ? {"paddingLeft":"33px","color":"#fff"} 
+                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","color":"#fff"} : {"color":"#fff"}
               }
             >
               {headCell.label}
@@ -139,7 +139,7 @@ EnhancedTableHead.propTypes = {
 };
 
 
-export default function EnhancedTable() {
+export default function AdminTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
@@ -170,8 +170,8 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableContainer>
+      <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
+        <TableContainer >
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
@@ -183,7 +183,7 @@ export default function EnhancedTable() {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
-            <TableBody>
+            <TableBody className="bg-[#1F2025]" >
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -191,10 +191,10 @@ export default function EnhancedTable() {
 
                   return (
                     <TableRow hover onClick={(event) => handleClick(event, row.name)} tabIndex={-1} key={row.name}>
-                      <TableCell component="th" id={labelId} scope="row" style={{"paddingLeft":"33px"}}> {row.name} </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right" style={{"paddingRight":"45px"}}>{row.carbs}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" style={{"paddingLeft":"33px","color":"#fff"}}> {row.name} </TableCell>
+                      <TableCell align="right" style={{"color":"#fff"}}>{row.calories}</TableCell>
+                      <TableCell align="right" style={{"color":"#fff"}}>{row.fat}</TableCell>
+                      <TableCell align="right" style={{"paddingRight":"45px","color":"#fff"}}>{row.carbs}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -211,6 +211,8 @@ export default function EnhancedTable() {
           </Table>
         </TableContainer>
         <TablePagination
+          style={{"color":"#fff"}}
+          className="bg-[#1F2025]"
           rowsPerPageOptions={[5, 8]}
           component="div"
           count={rows.length}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
+import Bloctable from "./Bloctable"
 export default function Blocpage() {
   const [searchnmame, setSearchname] = useState("");
   const [searchbloc, setSearchbloc] = useState("");
@@ -33,6 +34,7 @@ export default function Blocpage() {
               </div>
             </div>
           </section>
+          <Bloctable/>
         </div>
       </div>
     </div>

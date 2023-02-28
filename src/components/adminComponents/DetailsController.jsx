@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
-import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
-import PhoneIcon from '@mui/icons-material/Phone';
-
-
+import Details from "../../assets/Details.png";
+import gmail from "../../assets/gmail.png";
+import home from "../../assets/home.png";
+import phone from "../../assets/phone-call.png";
+import worker from "../../assets/worker.png";
 export default function DetailsController() {
   const [show, setShow] = useState(false);
 
@@ -30,8 +29,12 @@ export default function DetailsController() {
             </div>
           </div>
           <div>
-            <button onClick={() => setShow(!show)} className="flex gap-1 items-center ">
-              <span className="text-center font-mono font-extrabold text-white uppercase hover:text-[#b1b5ca]">
+            <button
+              onClick={() => setShow(!show)}
+              className="flex gap-1 items-center "
+            >
+              <img src={Details} alt="" className="w-6 h-6" />
+              <span className="text-center font-mono font-extrabold text-white uppercase">
                 Salaheddine elsfatimi
               </span>
             </button>
@@ -65,6 +68,7 @@ export default function DetailsController() {
             </div>
           </div>
         </section>
+        <ControlleTable/>
       </div>
     </div>
   );

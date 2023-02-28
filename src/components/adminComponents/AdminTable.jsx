@@ -95,7 +95,7 @@ const headCells = [
     id: "fat",
     numeric: true,
     disablePadding: false,
-    label: "phone number",
+    label: 'The_remaining_quantity',
   },
   {
     id: "carbs",
@@ -131,11 +131,8 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Full Name"
-                  ? { paddingLeft: "33px", color: "#fff" }
-                  : headCell.label === "See_detail"
-                  ? { paddingRight: "33px", color: "#fff" }
-                  : { color: "#fff" }
+                headCell.label === "Designation" ? {"paddingLeft":"33px"} 
+                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px"} : null
               }
             >
               {headCell.label}
@@ -190,12 +187,9 @@ export default function AdminTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper
-        sx={{ width: "100%", mb: 2 }}
-        style={{ borderRadius: "10px", backgroundColor: "#3C3D42" }}
-      >
-        <TableContainer>
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px"}}>
+        <TableContainer >
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
@@ -207,7 +201,7 @@ export default function AdminTable() {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
-            <TableBody className="bg-[#1F2025]">
+            <TableBody >
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -260,8 +254,6 @@ export default function AdminTable() {
           </Table>
         </TableContainer>
         <TablePagination
-          style={{ color: "#fff" }}
-          className="bg-[#1F2025]"
           rowsPerPageOptions={[5, 8]}
           component="div"
           count={rows.length}

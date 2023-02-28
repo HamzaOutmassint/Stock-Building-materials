@@ -33,8 +33,8 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
-            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>quantity_Completed</TableCell>
-            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>the_remaining_quantity</TableCell>
+            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
+            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
             <TableCell align="right" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
           </TableRow>
         </TableHead>

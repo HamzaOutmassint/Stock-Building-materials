@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NavAdmin from "./NavAdmin";
 export default function Add_new_Worker() {
   const [name, setName] = useState("");

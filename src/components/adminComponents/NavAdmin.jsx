@@ -8,9 +8,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Nav() {
   const [show, setShow] = useState(false);
-  function showsetting() {
-    setShow(!show);
-  }
+
   return (
     <div className="p-2 relative ">
       <div className="w-full bg-[#1F2025] p-3 rounded-lg flex justify-between items-center">
@@ -28,31 +26,28 @@ export default function Nav() {
           </div>
         </div>
         <div className="flex">
-          <button onClick={showsetting}>
+          <button onClick={()=>setShow(!show)}>
             <img src={setting} alt="" className="w-12 " />
           </button>
           <div
-            className={`absolute right-10 -bottom-40 space-y-4 z-50  bg-[#4C4D53] p-6 rounded-lg  ${
+            className={`absolute right-10 -bottom-40   bg-[#4C4D53] py-6 rounded-lg z-40  ${
               show == false ? "hidden" : "block"
             }`}
           >
-            <NavLink className="flex items-center gap-2">
+            <NavLink  className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={user} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Votre compte
               </span>
             </NavLink>
-
-            <NavLink
-              to={"../Add_new_worker"}
-              className="flex items-center gap-2"
-            >
+            
+            <NavLink to={"../Add_new_worker"} className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={adduser} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Add new worker
               </span>
             </NavLink>
-            <NavLink to="/" className="flex items-center gap-2">
+            <NavLink to="/" className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
               <img src={logout} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Déconnexion

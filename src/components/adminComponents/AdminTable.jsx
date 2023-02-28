@@ -75,13 +75,13 @@ const headCells = [
     id: 'calories',
     numeric: true,
     disablePadding: false,
-    label: 'quantity_Completed',
+    label: 'Quantity_Completed',
   },
   {
     id: 'fat',
     numeric: true,
     disablePadding: false,
-    label: 'the_remaining_quantity',
+    label: 'The_remaining_quantity',
   },
   {
     id: 'carbs',
@@ -113,8 +113,8 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Designation" ? {"paddingLeft":"33px","color":"#fff"} 
-                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","color":"#fff"} : {"color":"#fff"}
+                headCell.label === "Designation" ? {"paddingLeft":"33px"} 
+                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px"} : null
               }
             >
               {headCell.label}
@@ -170,7 +170,7 @@ export default function AdminTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
+      <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px"}}>
         <TableContainer >
           <Table
             sx={{ minWidth: 750 }}
@@ -183,7 +183,7 @@ export default function AdminTable() {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
-            <TableBody className="bg-[#1F2025]" >
+            <TableBody >
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -191,10 +191,10 @@ export default function AdminTable() {
 
                   return (
                     <TableRow hover onClick={(event) => handleClick(event, row.name)} tabIndex={-1} key={row.name}>
-                      <TableCell component="th" id={labelId} scope="row" style={{"paddingLeft":"33px","color":"#fff"}}> {row.name} </TableCell>
-                      <TableCell align="right" style={{"color":"#fff"}}>{row.calories}</TableCell>
-                      <TableCell align="right" style={{"color":"#fff"}}>{row.fat}</TableCell>
-                      <TableCell align="right" style={{"paddingRight":"45px","color":"#fff"}}>{row.carbs}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" style={{"paddingLeft":"33px"}}> {row.name} </TableCell>
+                      <TableCell align="right" style={{"paddingRight":"100px"}}>{row.calories}</TableCell>
+                      <TableCell align="right" style={{"paddingRight":"100px"}}>{row.fat}</TableCell>
+                      <TableCell align="right" style={{"paddingRight":"100px"}}>{row.carbs}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -211,8 +211,6 @@ export default function AdminTable() {
           </Table>
         </TableContainer>
         <TablePagination
-          style={{"color":"#fff"}}
-          className="bg-[#1F2025]"
           rowsPerPageOptions={[5, 8]}
           component="div"
           count={rows.length}

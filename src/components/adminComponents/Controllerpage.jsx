@@ -16,7 +16,7 @@ export default function Controllerpage() {
           <div className="flex  justify-end gap-10">
             <div>
               <input
-                className="bg-[#3C3D42] text-white p-3 h-11 rounded-xl w-64"
+                className="bg-[#3C3D42] pl-3 h-9 rounded-xl w-64 bg-[#4B484C] focus:outline none p-1 text-white text-xs"
                 type="text"
                 onChange={(e) => setSearchname(e.target.value)}
                 placeholder="Search for ... "
@@ -29,7 +29,7 @@ export default function Controllerpage() {
                 id=""
               
                 onChange={(e) => setSearchdate(e.target.value)}
-                className="bg-[#3C3D42] p-3 h-11 w-64 text-center rounded-xl font-mono  font-medium  text-white"
+                className="bg-[#3C3D42] p-3 h-9 w-64 text-center rounded-xl font-mono  font-medium focus:outline none p-1 text-white text-xs"
               >
                 <option selected >
                   All date

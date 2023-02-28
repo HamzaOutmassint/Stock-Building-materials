@@ -205,7 +205,7 @@ export default function AdminTable() {
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Phone}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
                       <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
-                        <NavLink to={"../DetailsController"} className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
+                        <NavLink to="../DetailsController"  className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
                       </TableCell>
                     </TableRow>
                   );

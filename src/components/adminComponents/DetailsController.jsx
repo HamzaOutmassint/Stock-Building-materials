@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
-import Details from "../../assets/Details.png";
-import gmail from "../../assets/gmail.png";
-import home from "../../assets/home.png";
-import phone from "../../assets/phone-call.png";
-import worker from "../../assets/worker.png";
+import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
+import PhoneIcon from '@mui/icons-material/Phone';
+
 export default function DetailsController() {
   const [show, setShow] = useState(false);
-
 
   return (
     <div>
@@ -29,12 +28,8 @@ export default function DetailsController() {
             </div>
           </div>
           <div>
-            <button
-              onClick={() => setShow(!show)}
-              className="flex gap-1 items-center "
-            >
-              <img src={Details} alt="" className="w-6 h-6" />
-              <span className="text-center font-mono font-extrabold text-white uppercase">
+          <button onClick={() => setShow(!show)} className="flex gap-1 items-center ">
+              <span className="text-center font-mono font-extrabold text-white uppercase hover:text-[#b1b5ca]">
                 Salaheddine elsfatimi
               </span>
             </button>

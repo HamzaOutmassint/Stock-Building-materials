@@ -13,7 +13,7 @@ function ChoseProject() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1  lg:pt-8  gap-4 ">
 
-            <Link to="/worker/controller-panel" className="bg-[#1F2025] space-y-10 py-36 rounded-lg shadow-2xl">
+            <Link to="/worker/controller-panel" className="bg-[#1F2025] hover:bg-[#313239] transition duration-300 space-y-10 py-36 rounded-lg shadow-2xl">
                 <div>
                     <img src={Logo} alt="" />
                 </div>
@@ -22,7 +22,7 @@ function ChoseProject() {
                 </div>
             </Link>
 
-            <Link to="/worker#meta-houses-project" className="bg-[#1F2025] space-y-10 py-36 rounded-lg shadow-2xl">
+            <Link to="/worker#meta-houses-project" className="bg-[#1F2025] hover:bg-[#313239] transition duration-300 space-y-10 py-36 rounded-lg shadow-2xl">
                 <div>
                     <img src={Logo} alt="" />
                 </div>
@@ -31,7 +31,7 @@ function ChoseProject() {
                 </div>
             </Link>
 
-            <Link to="/worker#realtoric-project" className="bg-[#1F2025] space-y-10 py-36 rounded-lg shadow-2xl">
+            <Link to="/worker#realtoric-project" className="bg-[#1F2025] hover:bg-[#313239] transition duration-300 space-y-10 py-36 rounded-lg shadow-2xl">
                 <div>
                     <img src={Logo} alt="" />
                 </div>

@@ -14,7 +14,7 @@ export default function Blocpage() {
             <div className="flex   gap-6">
               <div>
                 <input
-                  className="bg-[#3C3D42]  h-9 rounded-xl sm:w-64  focus:outline none p-1 text-white text-xs"
+                  className="bg-[#3C3D42] pl-2 h-9 rounded-xl sm:w-64  focus:outline none p-1 text-white text-xs"
                   type="text"
                   onChange={(e) => setSearchname(e.target.value)}
                   placeholder="Search for ... "
@@ -25,7 +25,7 @@ export default function Blocpage() {
                   name=""
                   id=""
                   onChange={(e) => setSearchbloc(e.target.value)}
-                  className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"
+                  className="bg-[#3C3D42] p-3  h-9 sm:w-44 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"
                 >
                   <option selected>All Bloc</option>
                   <option value="1">1</option>

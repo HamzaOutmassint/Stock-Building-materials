@@ -14,7 +14,7 @@ function ControllerPage() {
             <Nav/>
             <div className='px-4 pb-2'>
                 <div className='flex justify-between'>
-                    <select name="list-of-blocs" id="list-of-blocs" className='w-64 h-7  px-2 rounded-md flex items-center bg-[#3C3D42] text-white focus:outline-none'>
+                    <select name="list-of-blocs" id="list-of-blocs" className=' w-64 h-7  px-2 rounded-md flex items-center bg-[#3C3D42] text-white focus:outline-none'>
                         <option value="null">...</option>
                         <option value="bloc1-A">bloc A</option>
                         <option value="bloc-B">bloc B</option>

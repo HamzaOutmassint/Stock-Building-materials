@@ -19,7 +19,6 @@ function createData(name, calories, fat, carbs, See_detail) {
     calories,
     fat,
     carbs,
-
     See_detail,
   };
 }

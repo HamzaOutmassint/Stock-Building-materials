@@ -25,28 +25,15 @@ function createData(name, calories, fat, carbs, See_detail) {
 }
 
 const rows = [
-  createData("Amal", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("Donut", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("Eclair", "EE111", "0602314804", "Electricity", "see more details"),
-  createData(
-    "Frozen yoghurt",
-    "EE111",
-    "0602314804",
-    "Electricity",
-    "see more details"
-  ),
-  createData(
-    "Gingerbread",
-    "EE111",
-    "0602314804",
-    "Electricity",
-    "see more details"
-  ),
-  createData("hamza", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("hgdhgh", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("kjsd", "EE112", "0602314804", "Electricity", "see more details"),
-  createData("nksd", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("bjsdu", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("hamza outmassint", "EE12450", "0602314804", "Electricity", "see more details"),
+  createData("salah elfatimi", "EE11615", "0625451554", "Plumbing", "see more details"),
+  createData("walid katir", "EE45871", "0615489562", "Ventilation", "see more details"),
+  createData("hicham radi", "EE15021", "0653127586", "Air conditioner", "see more details"),
+  createData("youssef radi", "EE65487", "0612658745", "Plumbing", "see more details"),
+  createData("khalid bouskso", "EE21547", "0612457812", "Air conditioner", "see more details"),
+  createData("norddin amezwar", "EE13254", "0698547826", "Ventilation", "see more details"),
+  createData("samir mglawi", "EE14875", "0612325487", "Plumbing", "see more details"),
+  createData("imran sdjhds", "EE95847", "0645789512", "Electricity", "see more details"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -88,19 +75,19 @@ const headCells = [
     id: "calories",
     numeric: true,
     disablePadding: false,
-    label: "Identity card Number",
+    label: "Identity Card Number",
   },
   {
     id: "fat",
     numeric: true,
     disablePadding: false,
-    label: 'The_remaining_quantity',
+    label: 'Phone Number',
   },
   {
     id: "carbs",
     numeric: true,
     disablePadding: false,
-    label: "specialty",
+    label: "Specialty",
   },
   {
     id: "See_detail",
@@ -121,7 +108,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            align={headCell.numeric ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -130,8 +117,8 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Designation" ? {"paddingLeft":"33px"} 
-                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px"} : null
+                headCell.label === "Full Name" ? {"paddingLeft":"33px","fontWeight":600} 
+                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","fontWeight":600} : {"fontWeight":600}
               }
             >
               {headCell.label}
@@ -213,29 +200,12 @@ export default function AdminTable() {
                       tabIndex={-1}
                       key={row.name}
                     >
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        style={{ paddingLeft: "33px", color: "#fff" }}
-                      >
-                      
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right" style={{ color: "#fff" }}>
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" style={{ color: "#fff" }}>
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" style={{ color: "#fff" }}>
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        style={{ paddingRight: "45px", color: "#fff" }}
-                      >
-                        <NavLink to={"../DetailsController"}>{row.See_detail}</NavLink>
+                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px"}}>{row.name}</TableCell>
+                      <TableCell align="center"> {row.calories}</TableCell>
+                      <TableCell align="center"> {row.fat}</TableCell>
+                      <TableCell align="center"> {row.carbs}</TableCell>
+                      <TableCell align="right" style={{ paddingRight: "45px"}}>
+                        <NavLink to={"../DetailsController"} className="underline decoration-solid">{row.See_detail}</NavLink>
                       </TableCell>
                     </TableRow>
                   );

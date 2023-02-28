@@ -19,15 +19,15 @@ export default function Add_new_Worker() {
   return (
     <div>
       <NavAdmin />
-      <div className=" container ">
+      <div className="  ">
         <div className=" items-center flex flex-col">
           <div className=" flex flex-col gap-8 ">
             <div className=" text-white">
-              <h1 className=" font-mono font-extrabold text-4xl">
+              <h1 className=" font-mono font-extrabold text-xl text-center">
                 Add new Controlle
               </h1>
             </div>
-            <div className=" space-y-3">
+            <div className=" space-y-3 md:w-96">
               <div className="flex flex-col text-white">
                 <label htmlFor="Full_name">Full Name : </label>
                 <input
@@ -35,7 +35,7 @@ export default function Add_new_Worker() {
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   id="Full_name"
-                  className="bg-[#4B484C] rounded-md h-10 w-auto"
+                  className="bg-[#4B484C] rounded-md h-9 w-auto"
                 />
               </div>
               <div className="flex flex-col text-white">
@@ -45,7 +45,7 @@ export default function Add_new_Worker() {
                   onChange={(e) => setIdcard(e.target.value)}
                   type="text"
                   id="Id_Card"
-                  className="bg-[#4B484C] rounded-md h-10 w-auto"
+                  className="bg-[#4B484C] rounded-md h-9 w-auto"
                 />
               </div>
               <div className="flex flex-col text-white">
@@ -55,7 +55,7 @@ export default function Add_new_Worker() {
                   onChange={(e) => setAddress(e.target.value)}
                   type="text"
                   id="Address"
-                  className="bg-[#4B484C] rounded-md h-10 w-auto"
+                  className="bg-[#4B484C] rounded-md h-9 w-auto"
                 />
               </div>
               <div className="flex flex-col text-white">
@@ -63,7 +63,7 @@ export default function Add_new_Worker() {
                 <select
                   required
                   onChange={(e) => setSpecialty(e.target.value)}
-                  className="bg-[#4B484C] rounded-md h-10 w-auto"
+                  className="bg-[#4B484C] rounded-md h-9 w-auto"
                   name=""
                   id="specialty"
                 >
@@ -83,7 +83,7 @@ export default function Add_new_Worker() {
                   onChange={(e) => setPhone(e.target.value)}
                   type="telephone"
                   id="phone_number"
-                  className="bg-[#4B484C] rounded-md h-10 w-auto"
+                  className="bg-[#4B484C] rounded-md h-9 w-auto"
                 />
               </div>
 
@@ -94,7 +94,7 @@ export default function Add_new_Worker() {
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   id="email"
-                  className="bg-[#4B484C] rounded-md h-10 w-auto"
+                  className="bg-[#4B484C] rounded-md h-9 w-auto"
                 />
               </div>
             </div>

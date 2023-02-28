@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
-import Details from "../../assets/Details.png";
+import ControlleTable from "./CotrollerTable";
 import gmail from "../../assets/gmail.png";
 import home from "../../assets/home.png";
 import phone from "../../assets/phone-call.png";
@@ -41,7 +41,7 @@ export default function DetailsController() {
               onClick={() => setShow(!show)}
               className="flex gap-1 items-center "
             >
-              <img src={Details} alt="" className="w-6 h-6" />
+             
               <span className="text-center font-mono font-extrabold text-white uppercase">
                 Salaheddine elsfatimi
               </span>
@@ -80,6 +80,7 @@ export default function DetailsController() {
             </div>
           </div>
         </section>
+        <ControlleTable/>
       </div>
     </div>
   );

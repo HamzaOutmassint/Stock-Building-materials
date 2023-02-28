@@ -14,26 +14,25 @@ import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { NavLink } from "react-router-dom";
 
-function createData(name, Id_card, Phone, Specialty, See_detail) {
+function createData(Designation, quantity, achieve, rendement) {
   return {
-    name,
-    Id_card,
-    Phone,
-    Specialty,
-    See_detail,
+    Designation,
+    quantity,
+    achieve,
+    rendement,
   };
 }
 
 const rows = [
-  createData("hamza outmassint", "EE12450", "0602314804", "Electricity", "see more details"),
-  createData("salah elfatimi", "EE11615", "0625451554", "Plumbing", "see more details"),
-  createData("walid katir", "EE45871", "0615489562", "Ventilation", "see more details"),
-  createData("hicham radi", "EE15021", "0653127586", "Air conditioner", "see more details"),
-  createData("youssef radi", "EE65487", "0612658745", "Plumbing", "see more details"),
-  createData("khalid bouskso", "EE21547", "0612457812", "Air conditioner", "see more details"),
-  createData("norddin amezwar", "EE13254", "0698547826", "Ventilation", "see more details"),
-  createData("samir mglawi", "EE14875", "0612325487", "Plumbing", "see more details"),
-  createData("imran sdjhds", "EE95847", "0645789512", "Electricity", "see more details"),
+  createData("Bloc 0", "111", "12", "133"),
+  createData("Bloc 1", "334", "134", "111"),
+  createData("Bloc 2", "122", "123", "311"),
+  createData("Bloc 3", "312",  "21", "155"),
+  createData("Bloc 4", "11",  "124", "145"),
+  createData("Bloc 5", "455",  "124", "555"),
+  createData("Bloc 6", "322",  "566", "324"),
+  createData("Bloc 7", "676",  "343", "554"),
+  createData("Bloc 8", "453",  "232", "453"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -66,33 +65,29 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "name",
+    id: "Designation",
     numeric: false,
     disablePadding: true,
-    label: "Full Name",
+    label: "Designation",
   },
   {
-    id: "Id_card",
+    id: "quantity",
     numeric: true,
     disablePadding: false,
-    label: "Identity Card Number",
+    label: "quantity Completed",
+  },
+  
+  {
+    id: "achieve",
+    numeric: true,
+    disablePadding: false,
+    label: "To achieve",
   },
   {
-    id: "Phone",
+    id: "rendement",
     numeric: true,
     disablePadding: false,
-    label: 'Phone Number',
-  },
-  {
-    id: "Specialty",
-    numeric: true,
-    disablePadding: false,
-    label: "Specialty",
-  },
-  {
-    id: "See_detail",
-    numeric: true,
-    disablePadding: false,
+    label:"yield rendement"
   },
 ];
 
@@ -117,7 +112,7 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Full Name" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
+                headCell.label === "Designation" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
                 : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","fontWeight":600,"color":"#fff"} : {"fontWeight":600,"color":"#fff"}
               }
             >
@@ -144,7 +139,7 @@ EnhancedTableHead.propTypes = {
 
 export default function AdminTable() {
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("Id_card");
+  const [orderBy, setOrderBy] = React.useState("quantity");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
@@ -195,18 +190,16 @@ export default function AdminTable() {
 
                   return (
                     <TableRow
+                    
                       hover
                       onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
                       key={row.name}
                     >
-                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.name}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.Id_card}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.Phone}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
-                      <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
-                        <NavLink to={"../DetailsController"} className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
-                      </TableCell>
+                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.Designation}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.quantity}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.achieve}</TableCell>
+                      <TableCell align="center" style={{ paddingRight: "45px","color":"#fff"}}>{row.rendement}</TableCell>
                     </TableRow>
                   );
                 })}

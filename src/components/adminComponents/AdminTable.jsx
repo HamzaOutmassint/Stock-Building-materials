@@ -103,7 +103,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead className="bg-[#3C3D42]">
       <TableRow>
         {headCells.map((headCell) => (
           <TableCell
@@ -117,8 +117,8 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Full Name" ? {"paddingLeft":"33px","fontWeight":600} 
-                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","fontWeight":600} : {"fontWeight":600}
+                headCell.label === "Full Name" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
+                : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","fontWeight":600,"color":"#fff"} : {"fontWeight":600,"color":"#fff"}
               }
             >
               {headCell.label}
@@ -174,7 +174,7 @@ export default function AdminTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px"}}>
+      <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px", "backgroundColor":"#1F2025"}} >
         <TableContainer >
           <Table
             sx={{ minWidth: 750 }}
@@ -200,12 +200,12 @@ export default function AdminTable() {
                       tabIndex={-1}
                       key={row.name}
                     >
-                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px"}}>{row.name}</TableCell>
-                      <TableCell align="center"> {row.calories}</TableCell>
-                      <TableCell align="center"> {row.fat}</TableCell>
-                      <TableCell align="center"> {row.carbs}</TableCell>
-                      <TableCell align="right" style={{ paddingRight: "45px"}}>
-                        <NavLink to={"../DetailsController"} className="underline decoration-solid">{row.See_detail}</NavLink>
+                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.name}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.calories}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.fat}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.carbs}</TableCell>
+                      <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
+                        <NavLink to={"../DetailsController"} className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
                       </TableCell>
                     </TableRow>
                   );
@@ -223,6 +223,7 @@ export default function AdminTable() {
           </Table>
         </TableContainer>
         <TablePagination
+        style={{"color":"#fff"}}
           rowsPerPageOptions={[5, 8]}
           component="div"
           count={rows.length}

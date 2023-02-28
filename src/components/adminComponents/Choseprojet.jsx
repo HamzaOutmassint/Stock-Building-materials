@@ -19,7 +19,7 @@ export default function Choseprojet() {
           <div>
             <img src={Logo} alt="" />
           </div>
-          <div className="text-center text-white font-extrabold font-mono text-6xl">
+          <div className="text-center text-white font-extrabold font-mono text-4xl">
             <span>Realtoric</span>
           </div>
         </button>
@@ -32,7 +32,7 @@ export default function Choseprojet() {
           <div>
             <img src={Logo} alt="" />
           </div>
-          <div className="text-center text-white font-extrabold font-mono text-6xl">
+          <div className="text-center text-white font-extrabold font-mono text-4xl">
             <span>Project atlas</span>
           </div>
         </button>
@@ -44,7 +44,7 @@ export default function Choseprojet() {
           <div>
             <img src={Logo} alt="" />
           </div>
-          <div className="text-center text-white font-extrabold font-mono text-6xl">
+          <div className="text-center text-white font-extrabold font-mono text-4xl">
             <span>Meta Houses</span>
           </div>
         </button>

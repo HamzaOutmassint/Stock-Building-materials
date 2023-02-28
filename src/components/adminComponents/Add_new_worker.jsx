@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavAdmin from "./NavAdmin";
 export default function Add_new_Worker() {
   const [name, setName] = useState("");
@@ -31,6 +31,7 @@ export default function Add_new_Worker() {
               <div className="flex flex-col text-white">
                 <label htmlFor="Full_name">Full Name : </label>
                 <input
+                  required
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   id="Full_name"
@@ -40,6 +41,7 @@ export default function Add_new_Worker() {
               <div className="flex flex-col text-white">
                 <label htmlFor="Id_Card :">Id Card : </label>
                 <input
+                  required
                   onChange={(e) => setIdcard(e.target.value)}
                   type="text"
                   id="Id_Card"
@@ -49,6 +51,7 @@ export default function Add_new_Worker() {
               <div className="flex flex-col text-white">
                 <label htmlFor="Address">Address : </label>
                 <input
+                  required
                   onChange={(e) => setAddress(e.target.value)}
                   type="text"
                   id="Address"
@@ -58,6 +61,7 @@ export default function Add_new_Worker() {
               <div className="flex flex-col text-white">
                 <label htmlFor="specialty">Specialty : </label>
                 <select
+                  required
                   onChange={(e) => setSpecialty(e.target.value)}
                   className="bg-[#4B484C] rounded-md h-10 w-auto"
                   name=""
@@ -75,6 +79,7 @@ export default function Add_new_Worker() {
               <div className="flex flex-col text-white">
                 <label htmlFor="phone_number">Phone number : </label>
                 <input
+                  required
                   onChange={(e) => setPhone(e.target.value)}
                   type="telephone"
                   id="phone_number"
@@ -85,6 +90,7 @@ export default function Add_new_Worker() {
               <div className="flex flex-col text-white">
                 <label htmlFor="email">Email : </label>
                 <input
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   id="email"

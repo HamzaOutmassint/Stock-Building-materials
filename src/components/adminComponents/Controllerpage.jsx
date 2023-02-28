@@ -9,11 +9,11 @@ export default function Controllerpage() {
   console.log(searchnmame);
 
   return (
-    <div>
+    <div className=" ">
       <Nav />
-      <div className="p-2">
+      <div className="p-2  ">
         <section className="pb-2">
-          <div className="flex  justify-end gap-10">
+          <div className="flex  sm:justify-end gap-6">
             <div>
               <input
                 className="bg-[#3C3D42] pl-3 h-9 rounded-xl w-64 bg-[#4B484C] focus:outline none p-1 text-white text-xs"
@@ -23,26 +23,21 @@ export default function Controllerpage() {
               />
             </div>
             <div className="flex gap-4 items-center">
-              
               <select
                 name=""
                 id=""
-              
                 onChange={(e) => setSearchdate(e.target.value)}
                 className="bg-[#3C3D42] p-3 h-9 w-64 text-center rounded-xl font-mono  font-medium focus:outline none p-1 text-white text-xs"
               >
-                <option selected >
-                  All date
-                </option>
-                <option  value="1">
-                  1
-                </option>
+                <option selected>All date</option>
+                <option value="1">1</option>
               </select>
             </div>
           </div>
         </section>
-        
-        <AdminTable/>
+        <div className=" ">
+          <AdminTable />
+        </div>
       </div>
     </div>
   );

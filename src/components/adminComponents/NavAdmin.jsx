@@ -6,7 +6,6 @@ import user from "../../assets/user.png";
 import adduser from "../../assets/add-user.png";
 import { NavLink } from "react-router-dom";
 
-
 export default function Nav() {
   const [show, setShow] = useState(false);
 
@@ -22,9 +21,7 @@ export default function Nav() {
             />
           </div>
           <div className="flex flex-col text-white">
-            <span className="font-mono font-bold ">
-              Salaheddine elfatimi
-            </span>
+            <span className="font-mono font-bold ">Salaheddine elfatimi</span>
             <span className="font-mono font-thin ">admin</span>
           </div>
         </div>
@@ -50,12 +47,12 @@ export default function Nav() {
                 Add new worker
               </span>
             </NavLink>
-            <div className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73] cursor-pointer">
+            <NavLink to="/" className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
               <img src={logout} alt="" className="w-8" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Déconnexion
               </span>
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>

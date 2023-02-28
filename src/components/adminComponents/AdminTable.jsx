@@ -1,39 +1,52 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Paper from '@mui/material/Paper';
-import { visuallyHidden } from '@mui/utils';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Paper from "@mui/material/Paper";
+import { visuallyHidden } from "@mui/utils";
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(name, calories, fat, carbs, See_detail) {
   return {
     name,
     calories,
     fat,
     carbs,
-    protein,
+
+    See_detail,
   };
 }
 
 const rows = [
-  createData('Amal', 1, 3.7, 67),
-  createData('Donut', 452, 25.0, 51),
-  createData('Eclair', 262, 16.0, 24),
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Gingerbread', 356, 16.0, 49),
-  createData('hamza', 1, 3.7, 67),
-  createData('hgdhgh', 452, 25.0, 51),
-  createData('kjsd', 262, 16.0, 24),
-  createData('nksd', 159, 6.0, 24),
-  createData('bjsdu', 356, 16.0, 49),
+  createData("Amal", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("Donut", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("Eclair", "EE111", "0602314804", "Electricity", "see more details"),
+  createData(
+    "Frozen yoghurt",
+    "EE111",
+    "0602314804",
+    "Electricity",
+    "see more details"
+  ),
+  createData(
+    "Gingerbread",
+    "EE111",
+    "0602314804",
+    "Electricity",
+    "see more details"
+  ),
+  createData("hamza", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("hgdhgh", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("kjsd", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("nksd", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("bjsdu", "EE111", "0602314804", "Electricity", "see more details"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -47,7 +60,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -66,34 +79,38 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: "name",
     numeric: false,
     disablePadding: true,
-    label: 'Designation',
+    label: "Full Name",
   },
   {
-    id: 'calories',
+    id: "calories",
     numeric: true,
     disablePadding: false,
-    label: 'Quantity_Completed',
+    label: "Identity card Number",
   },
   {
-    id: 'fat',
+    id: "fat",
     numeric: true,
     disablePadding: false,
     label: 'The_remaining_quantity',
   },
   {
-    id: 'carbs',
+    id: "carbs",
     numeric: true,
     disablePadding: false,
-    label: 'Number_of_Persons',
-  }
+    label: "specialty",
+  },
+  {
+    id: "See_detail",
+    numeric: true,
+    disablePadding: false,
+  },
 ];
 
 function EnhancedTableHead(props) {
-  const {order, orderBy, onRequestSort } =
-    props;
+  const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -104,13 +121,13 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
                 headCell.label === "Designation" ? {"paddingLeft":"33px"} 
@@ -120,7 +137,7 @@ function EnhancedTableHead(props) {
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </Box>
               ) : null}
             </TableSortLabel>
@@ -133,22 +150,21 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-
 export default function AdminTable() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("calories");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -166,7 +182,8 @@ export default function AdminTable() {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -175,7 +192,7 @@ export default function AdminTable() {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
               order={order}

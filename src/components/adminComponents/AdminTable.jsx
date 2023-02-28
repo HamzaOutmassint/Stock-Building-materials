@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
+import { NavLink } from "react-router-dom";
 
 function createData(name, calories, fat, carbs, See_detail) {
   return {
@@ -43,7 +44,7 @@ const rows = [
   ),
   createData("hamza", "EE111", "0602314804", "Electricity", "see more details"),
   createData("hgdhgh", "EE111", "0602314804", "Electricity", "see more details"),
-  createData("kjsd", "EE111", "0602314804", "Electricity", "see more details"),
+  createData("kjsd", "EE112", "0602314804", "Electricity", "see more details"),
   createData("nksd", "EE111", "0602314804", "Electricity", "see more details"),
   createData("bjsdu", "EE111", "0602314804", "Electricity", "see more details"),
 ];
@@ -206,11 +207,36 @@ export default function AdminTable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover onClick={(event) => handleClick(event, row.name)} tabIndex={-1} key={row.name}>
-                      <TableCell component="th" id={labelId} scope="row" style={{"paddingLeft":"33px"}}> {row.name} </TableCell>
-                      <TableCell align="right" style={{"paddingRight":"100px"}}>{row.calories}</TableCell>
-                      <TableCell align="right" style={{"paddingRight":"100px"}}>{row.fat}</TableCell>
-                      <TableCell align="right" style={{"paddingRight":"100px"}}>{row.carbs}</TableCell>
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.name)}
+                      tabIndex={-1}
+                      key={row.name}
+                    >
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        style={{ paddingLeft: "33px", color: "#fff" }}
+                      >
+                      
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right" style={{ color: "#fff" }}>
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" style={{ color: "#fff" }}>
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" style={{ color: "#fff" }}>
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        style={{ paddingRight: "45px", color: "#fff" }}
+                      >
+                        <NavLink to={"../DetailsController"}>{row.See_detail}</NavLink>
+                      </TableCell>
                     </TableRow>
                   );
                 })}

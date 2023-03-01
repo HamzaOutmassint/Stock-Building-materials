@@ -87,7 +87,7 @@ const headCells = [
     id: "rendement",
     numeric: true,
     disablePadding: false,
-    label:"yield rendement"
+    label:"yield"
   },
 ];
 

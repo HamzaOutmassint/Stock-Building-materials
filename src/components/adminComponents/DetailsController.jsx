@@ -45,7 +45,7 @@ export default function DetailsController() {
                 <div className="flex gap-2 items-center">
                   <MailOutlineRoundedIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>
                   <span className="font-mono  text-white">
-                  <span className="font-semibold">Email:</span> hamzaSlah@gmail.com
+                  <span className="font-semibold">Email:</span> hamzasalah@gmail.com
                   </span>
                 </div>
                 <div className="flex gap-2 items-center">

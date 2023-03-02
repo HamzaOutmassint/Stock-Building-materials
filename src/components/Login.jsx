@@ -1,21 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  
-  function handelSbmite(){
-    // (username=="root"&&password=="1234")?navigate("../Choseprojet"):alert("errur");
+  const [loginData , setLoginData] =useState({
+    username:"",
+    password:""
+  });
 
-    if(username=="root"&&password=="1234"){
-      navigate("/admin")
-    }else if(username=="controller"&&password=="1234"){
-      navigate("/worker")
-    }else{
-      alert("errur");
-    }
+  const handlChange=(e)=>{
+    const name=e.target.name;
+    const value=e.target.value;
+    setLoginData((prev)=>(
+      {...loginData , [name]:value}
+    ))
+  }
+
+  function handelSbmite(){
+
+    axios.post("http://localhost/project_atlass/Login_admin.php",loginData).then((res)=>{
+      console.log(res.data)
+      if(res.data.whoLogged === "admin"){
+        navigate("/admin")
+      }else if(res.data.whoLogged === "controler"){
+        navigate("/worker")
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
 
   return (
@@ -32,11 +45,12 @@ export default function Login() {
               Username :
             </label>
             <input
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={(e)=>handlChange(e)}
               type="text"
               id="username"
+              name="username"
               className="bg-[#4B484C] w-full h-10 rounded-md pl-2 focus:outline-none"
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
           <div>
@@ -44,9 +58,10 @@ export default function Login() {
               Password :
             </label>
             <input
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(e)=>handlChange(e)}
               type="password"
               id="password"
+              name="password"
               className="bg-[#4B484C] w-full h-10 rounded-md pl-2 focus:outline-none"
             />
           </div>

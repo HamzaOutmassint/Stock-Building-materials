@@ -9,13 +9,13 @@ export default function Login() {
   function handelSbmite(){
     // (username=="root"&&password=="1234")?navigate("../Choseprojet"):alert("errur");
 
-    if(username=="root"&&password=="1234"){
-      navigate("/admin")
-    }else if(username=="controller"&&password=="1234"){
-      navigate("/worker")
-    }else{
-      alert("errur");
-    }
+    // if(username=="root"&&password=="1234"){
+    //   navigate("/admin")
+    // }else if(username=="controller"&&password=="1234"){
+    //   navigate("/worker")
+    // }else{
+    //   alert("errur");
+    // }
   }
 
   return (

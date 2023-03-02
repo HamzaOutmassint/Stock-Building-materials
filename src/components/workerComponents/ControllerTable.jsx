@@ -6,6 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import axios from "axios";
+import {useState , useEffect} from "react";
 
 function createData(name, calories, fat, carbs) {
   return { name, calories, fat, carbs };
@@ -14,19 +16,42 @@ function createData(name, calories, fat, carbs) {
 // style for inputs
 const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs'
 
-const rows = [
-  createData('hamza',<input type="number" className={InputStyle} />,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('hicham',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('youssef',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('norddin',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('salah',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('walid',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-];
 
-export default function BasicTable() {
+export default function BasicTable({speciality}) {
+  const [designatio , setDesignatio] = useState(null)
+
+  useEffect(()=>{
+    axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
+      console.log(res.data)
+      setDesignatio(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },[])
+
+  console.log(speciality)
+
+  const rows = [
+    // createData('hamza',<input type="number" className={InputStyle} />,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    // createData('hicham',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    // createData('youssef',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    // createData('norddin',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    // createData('salah',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    createData('walid',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    // createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+    // createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
+  
+    
+  
+  ];
+
+  // const rows = designatio.map((ele,index)=>(
+  //     createData(ele.designationName,<input type="number" className={InputStyle} />,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>)
+  // ))
+
+
+
   return (
     <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

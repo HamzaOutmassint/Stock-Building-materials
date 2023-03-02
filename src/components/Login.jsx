@@ -13,18 +13,18 @@ export default function Login() {
     const name=e.target.name;
     const value=e.target.value;
     setLoginData((prev)=>(
-      {...loginData , [name]:value}
+      {...prev , [name]:value}
     ))
   }
 
   function handelSbmite(){
 
     axios.post("http://localhost/project_atlass/Login_admin.php",loginData).then((res)=>{
-      console.log(res.data)
+      // console.log(typeof res.data.idControler)
       if(res.data.whoLogged === "admin"){
         navigate("/admin")
       }else if(res.data.whoLogged === "controler"){
-        navigate("/worker")
+        navigate(`/worker/#${res.data.idControler}`)
       }
     }).catch((err)=>{
       console.log(err)

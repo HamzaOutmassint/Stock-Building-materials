@@ -36,7 +36,7 @@ export default function Add_new_Worker() {
     const name = e.target.name
     const value = e.target.value
     setDataControler((prev)=>({
-      ...dataControler , [name]:value
+      ...prev , [name]:value
     }))
   }
 
@@ -60,7 +60,7 @@ export default function Add_new_Worker() {
     const name = e.target.name
     const value = e.target.value
     setDataLogin((prev)=>({
-      ...dataLogin , [name]:value
+      ...prev , [name]:value , idCard:dataControler.idCard
     }))
   }
 

@@ -1,17 +1,32 @@
 import Nav from './NavController'
-import checked from '../../assets/checked.png'
 import ControllerTable from './ControllerTable';
 import { Button } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from "axios";
 
 function ControllerPage() {
+    const location = useLocation();
+    const [fullName , setFullName] = useState("")
+    const [speciality , setSpeciality] = useState("")
+
+    const id = {id:parseInt(location.hash.slice(1))}
+    useEffect(()=>{
+        axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then((res)=>{
+            setFullName(res.data.fullName)
+            setSpeciality(res.data.speciality)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[])
 
     // create the curent date
     var curenteDate = new Date();
     
     return (
         <>
-            <Nav/>
+            <Nav fullName={fullName} speciality={speciality}/>
             <div className='px-4 pb-2'>
                 <div className='flex justify-between'>
                     <select name="list-of-blocs" id="list-of-blocs" className=' w-64 h-7  px-2 rounded-md flex items-center bg-[#3C3D42] text-white focus:outline-none'>
@@ -34,7 +49,7 @@ function ControllerPage() {
                     </div>
                 </div>
                 <div className='pt-2'>
-                    <ControllerTable />
+                    <ControllerTable speciality={speciality}/>
                 </div>
             </div>
         </>

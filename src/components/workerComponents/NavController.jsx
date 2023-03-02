@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logout from "../../assets/logout.png"
 
 
-export default function Nav() {
+export default function Nav({fullName , speciality}) {
 
   return (
     <div className="p-4 relative ">
@@ -18,9 +18,9 @@ export default function Nav() {
           </div>
           <div className="flex flex-col text-white">
             <span className="font-mono font-bold">
-              Salaheddine elfatimi
+              {fullName}
             </span>
-            <span className="font-mono font-thin text-sm">worker</span>
+            <span className="font-mono font-thin text-sm">{speciality}</span>
           </div>
         </div>
         <div className="flex">

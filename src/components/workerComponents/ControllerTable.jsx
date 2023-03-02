@@ -18,18 +18,20 @@ const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white te
 
 
 export default function BasicTable({speciality}) {
-  const [designatio , setDesignatio] = useState(null)
+  const [designatio , setDesignatio] = useState([])
+
 
   useEffect(()=>{
     axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
-      console.log(res.data)
+     
+
       setDesignatio(res.data)
     }).catch((err)=>{
       console.log(err)
     })
-  },[])
+  })
 
-  console.log(speciality)
+  
 
   const rows = [
     // createData('hamza',<input type="number" className={InputStyle} />,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
@@ -46,10 +48,10 @@ export default function BasicTable({speciality}) {
   
   ];
 
-  // const rows = designatio.map((ele,index)=>(
-  //     createData(ele.designationName,<input type="number" className={InputStyle} />,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>)
+  // const affi = designatio.map((ele,index)=>(
+  //   console.log(ele.designationName)
   // ))
-
+  console.log(designatio)
 
 
   return (

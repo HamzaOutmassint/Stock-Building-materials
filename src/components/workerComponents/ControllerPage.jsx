@@ -16,10 +16,12 @@ function ControllerPage() {
         axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then((res)=>{
             setFullName(res.data.fullName)
             setSpeciality(res.data.speciality)
+            
+
         }).catch((err)=>{
             console.log(err)
         })
-    },[])
+    })
 
     // create the curent date
     var curenteDate = new Date();

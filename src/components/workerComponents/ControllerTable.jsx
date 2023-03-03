@@ -8,60 +8,81 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from "axios";
 import {useState , useEffect} from "react";
+import Button from '@mui/material/Button';
 
 function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_Persons) {
   return { name,Quantity_Completed, The_remaining_quantity, Number_of_Persons };
 }
 
 // style for inputs
-const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs'
+const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs text-center'
 
-export default function BasicTable({speciality}) {
+export default function BasicTable({speciality , eachItemFromControlerPage}) {
   const [designation , setDesignation] = useState([])
-  const [quantity_completed , setQuantity_Completed] = useState([])
+  const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
+
 
   useEffect(()=>{
-    axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
-      setDesignation(res.data.designationName)
-    }).catch((err)=>{
-      console.log(err)
-    })
-  })
+    if(speciality !== ""){
+      axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
+        setDesignation(res.data.designationName)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+  },[speciality])
 
-  const affi = designation?.map((ele,key)=>(
-   createData(ele.designationName,<input type="number"  name='Quantity_Completed' onChange={(e)=>setQuantity_Completed(e.target.value)} className={InputStyle}/>,<input type="number" name='The_remaining_quantity' className={InputStyle}/>,<input type="number" name='Number_of_Persons' className={InputStyle}/>)
+  const handlChange=(e)=>{
+    const designationName = e.target.id
 
+    setEachItem((prev)=>(
+      {...prev , [e.target.name] : e.target.value , designation : designationName}
+    ))
+  }
+  const valid=(designationName)=>{
+    console.log(designationName)
+  }
+
+  const afficherDonner = designation?.map((ele,key)=>(
+   createData(
+    ele.designationName,
+    <input type="number" id={ele.designationName} defaultValue="0"  name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
+    <input type="number" id={ele.designationName} defaultValue="0" name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
+    <input type="number" id={ele.designationName} defaultValue="0" name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
+   )
   ))
-  console.log(quantity_completed)
 
-
-
-
-  
-
-
-  return (
-    <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
-            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
-            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
-            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody className="bg-[#1F2025]">
-          {affi?.map((row) => (
-            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row" style={{"color":"#fff","paddingLeft":"30px"}}>{row.name}</TableCell>
-              <TableCell align="center">{row.Quantity_Completed}</TableCell>
-              <TableCell align="center">{row.The_remaining_quantity}</TableCell>
-              <TableCell align="center">{row.Number_of_Persons}</TableCell>
+  if(designation.length !== 0){
+    return(
+      <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
+              <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
+              <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
+              <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
+              <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Action</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+          </TableHead>
+          <TableBody className="bg-[#1F2025]">
+            {afficherDonner?.map((row , index) => (
+              <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component="th" scope="row" style={{"color":"#fff","paddingLeft":"30px"}}>{row.name}</TableCell>
+                <TableCell align="center">{row.Quantity_Completed}</TableCell>
+                <TableCell align="center">{row.The_remaining_quantity}</TableCell>
+                <TableCell align="center">{row.Number_of_Persons}</TableCell>
+                <TableCell align="center">
+                  <Button style={{"backgroundColor":"#BBE1FA", "color":"#1b1919" ,"textTransform":"lowercase","fontWeight":600,"width": "100px"}}
+                    onClick={()=>valid(row.name)}>
+                    valid
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )
+  }
 }

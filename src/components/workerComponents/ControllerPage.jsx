@@ -7,24 +7,27 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 
 function ControllerPage() {
+    // create the curent date
+    var curenteDate = new Date();
     const location = useLocation();
     const [fullName , setFullName] = useState("")
     const [speciality , setSpeciality] = useState("")
+    const [chicklistData , setChicklistData] = useState([])
 
     const id = {id:parseInt(location.hash.slice(1))}
     useEffect(()=>{
         axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then((res)=>{
             setFullName(res.data.fullName)
             setSpeciality(res.data.speciality)
-            
-
         }).catch((err)=>{
             console.log(err)
         })
     })
 
-    // create the curent date
-    var curenteDate = new Date();
+    const validation = (e)=>{
+        e.preventDefault();
+        console.log(eachItem)
+    }
     
     return (
         <>
@@ -39,7 +42,7 @@ function ControllerPage() {
                         <option value="bloc-E">bloc E</option>
                     </select>
                     <div className='flex gap-2 items-center'>
-                        <Button style={{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}}>
+                        <Button style={{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={(e)=>validation(e)}>
                             Validation
                             <CheckCircleOutlineRoundedIcon style={{"fontSize":"30px" , "marginLeft":"5px"}}/>
                         </Button>

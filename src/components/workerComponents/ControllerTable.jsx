@@ -19,7 +19,9 @@ const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white te
 
 export default function BasicTable({speciality , eachItemFromControlerPage}) {
   const [designation , setDesignation] = useState([])
+ 
   const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
+
 
 
   useEffect(()=>{
@@ -34,21 +36,27 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
 
   const handlChange=(e)=>{
     const designationName = e.target.id
-
+    if(eachItem.designation==""){
     setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value}
+      {...prev , [e.target.name] : e.target.value ,designation:designationName}
+    ))
+  }else if (designationName==eachItem.designation){
+    setEachItem((prev)=>(
+      {...prev , [e.target.name] : e.target.value ,designation:designationName}
     ))
   }
-  const valid=(designationName)=>{
-    console.log(designationName)
-  }
+}
 
+  const valid=(designationName)=>{
+    console.log(eachItem)
+  }
+console.log(eachItem.designation)
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,
-    <input type="number" defaultValue="0"  name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
-    <input type="number" defaultValue="0" name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
-    <input type="number" defaultValue="0" name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
+    <input type="number" id={ele.designationName} defaultValue="0" name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
+    <input type="number" id={ele.designationName} defaultValue="0" name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
+    <input type="number" id={ele.designationName} defaultValue="0" name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
    )
   ))
 

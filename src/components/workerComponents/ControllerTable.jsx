@@ -36,7 +36,7 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
     const designationName = e.target.id
 
     setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value , designation : designationName}
+      {...prev , [e.target.name] : e.target.value}
     ))
   }
   const valid=(designationName)=>{
@@ -46,9 +46,9 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,
-    <input type="number" id={ele.designationName} defaultValue="0"  name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
-    <input type="number" id={ele.designationName} defaultValue="0" name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
-    <input type="number" id={ele.designationName} defaultValue="0" name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
+    <input type="number" defaultValue="0"  name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
+    <input type="number" defaultValue="0" name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
+    <input type="number" defaultValue="0" name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
    )
   ))
 

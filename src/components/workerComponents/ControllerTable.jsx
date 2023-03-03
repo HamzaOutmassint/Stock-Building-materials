@@ -19,7 +19,7 @@ const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white te
 
 export default function BasicTable({speciality , eachItemFromControlerPage}) {
   const [designation , setDesignation] = useState([])
- 
+  const [items , setItems] = useState([])
   const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
 
 
@@ -44,13 +44,25 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
     setEachItem((prev)=>(
       {...prev , [e.target.name] : e.target.value ,designation:designationName}
     ))
+  }else if(designationName!=eachItem.designation){
+    setItems(items => [...items,eachItem] );
+    setEachItem({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
+    setEachItem((prev)=>(
+      {...prev , [e.target.name] : e.target.value ,designation:designationName}
+    ))
+  }else{
+    items.map((ele)=>(
+      ele.designation?designationName==eachItem.designation
+    ))
+    
   }
 }
-
+  console.log(eachItem)
+  console.log(items)
   const valid=(designationName)=>{
     console.log(eachItem)
   }
-console.log(eachItem.designation)
+
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,

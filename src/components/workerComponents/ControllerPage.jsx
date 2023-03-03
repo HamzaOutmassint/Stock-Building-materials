@@ -45,7 +45,7 @@ function ControllerPage() {
                         </Button>
                         <span className='text-white'>
                             {curenteDate.getDate()<10?`0${curenteDate.getDate()}`:curenteDate.getDate()}/
-                            {curenteDate.getMonth()<10?`0${curenteDate.getMonth()}`:curenteDate.getMonth()}/
+                            {curenteDate.getMonth()<10?`0${curenteDate.getMonth()+1}`:curenteDate.getMonth()+1}/
                             {curenteDate.getFullYear()}
                         </span>
                     </div>

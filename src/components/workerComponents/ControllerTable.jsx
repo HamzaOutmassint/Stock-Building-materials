@@ -18,6 +18,7 @@ const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white te
 
 export default function BasicTable({speciality}) {
   const [designation , setDesignation] = useState([])
+  const [quantity_completed , setQuantity_Completed] = useState([])
 
   useEffect(()=>{
     axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
@@ -27,26 +28,14 @@ export default function BasicTable({speciality}) {
     })
   })
 
-  const affi = designation?.map((ele)=>(
-   createData(ele.designationName,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>)
+  const affi = designation?.map((ele,key)=>(
+   createData(ele.designationName,<input type="number"  name='Quantity_Completed' onChange={(e)=>setQuantity_Completed(e.target.value)} className={InputStyle}/>,<input type="number" name='The_remaining_quantity' className={InputStyle}/>,<input type="number" name='Number_of_Persons' className={InputStyle}/>)
 
   ))
+  console.log(quantity_completed)
 
 
-  // const rows = [
-  //   // createData('hamza',<input type="number" className={InputStyle} />,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   // createData('hicham',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   // createData('youssef',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   // createData('norddin',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   // createData('salah',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   createData('walid',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   // createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  //   // createData('brahim',<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>,<input type="number" className={InputStyle}/>),
-  
-    
-  
-  // ];
+
 
   
 

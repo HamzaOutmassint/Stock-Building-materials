@@ -17,7 +17,7 @@ function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_P
 // style for inputs
 const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs text-center'
 
-export default function BasicTable({speciality , eachItemFromControlerPage}) {
+export default function BasicTable({speciality , pushItem}) {
   const [designation , setDesignation] = useState([])
  
   const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
@@ -47,10 +47,8 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
   }
 }
 
-  const valid=(designationName)=>{
-    console.log(eachItem)
-  }
-console.log(eachItem.designation)
+
+  console.log(eachItem)
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,
@@ -82,7 +80,7 @@ console.log(eachItem.designation)
                 <TableCell align="center">{row.Number_of_Persons}</TableCell>
                 <TableCell align="center">
                   <Button style={{"backgroundColor":"#BBE1FA", "color":"#1b1919" ,"textTransform":"lowercase","fontWeight":600,"width": "100px"}}
-                    onClick={()=>valid(row.name)}>
+                    onClick={func}>
                     valid
                   </Button>
                 </TableCell>

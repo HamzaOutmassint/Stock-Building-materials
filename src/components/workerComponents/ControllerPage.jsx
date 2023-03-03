@@ -26,9 +26,9 @@ function ControllerPage() {
 
     const validation = (e)=>{
         e.preventDefault();
-        console.log(eachItem)
+        console.log(chicklistData)
     }
-    
+
     return (
         <>
             <Nav fullName={fullName} speciality={speciality}/>
@@ -54,7 +54,7 @@ function ControllerPage() {
                     </div>
                 </div>
                 <div className='pt-2'>
-                    <ControllerTable speciality={speciality}/>
+                    <ControllerTable speciality={speciality} pushItem={pushItemFunction}/>
                 </div>
             </div>
         </>

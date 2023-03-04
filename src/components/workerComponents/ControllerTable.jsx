@@ -19,10 +19,8 @@ const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white te
 
 export default function BasicTable({speciality , pushItem}) {
   const [designation , setDesignation] = useState([])
- 
+  const [items , setItems] = useState([])
   const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
-
-
 
   useEffect(()=>{
     if(speciality !== ""){
@@ -37,18 +35,27 @@ export default function BasicTable({speciality , pushItem}) {
   const handlChange=(e)=>{
     const designationName = e.target.id
     if(eachItem.designation==""){
-    setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value ,designation:designationName}
-    ))
-  }else if (designationName==eachItem.designation){
-    setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value ,designation:designationName}
-    ))
-  }
+      setEachItem((prev)=>(
+        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+      ))
+    }else if (designationName==eachItem.designation){
+      setEachItem((prev)=>(
+        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+      ))
+    }else if(designationName !== eachItem.designation){
+      setItems(items => [...items,eachItem] );
+      setEachItem({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
+      setEachItem((prev)=>(
+        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+      ))
+    }
 }
-
-
   console.log(eachItem)
+  console.log(items)
+  const valid=(designationName)=>{
+    console.log(eachItem)
+  }
+
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,
@@ -80,7 +87,7 @@ export default function BasicTable({speciality , pushItem}) {
                 <TableCell align="center">{row.Number_of_Persons}</TableCell>
                 <TableCell align="center">
                   <Button style={{"backgroundColor":"#BBE1FA", "color":"#1b1919" ,"textTransform":"lowercase","fontWeight":600,"width": "100px"}}
-                    onClick={func}>
+                   >
                     valid
                   </Button>
                 </TableCell>

@@ -213,41 +213,37 @@ function ControllerPage() {
                     </div>
                 </div>
                 <div className='pt-2'>
-                    <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            {
-                                bloc === ''
-                                ?
-                                <thead className='h-auto'>
-                                    <tr className='flex items-center justify-center h-96'>
-                                        <td className='md:text-2xl font-bold text-[#202224]'>Please enter bloc name first</td>
-                                    </tr>
-                                </thead>
-                                :
-                                <>
-                                    <TableHead>
-                                        <TableRow>
-                                        <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
-                                        <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
-                                        <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
-                                        <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody className="bg-[#1F2025]">
-                                        {afficherDonner?.map((row , index) => (
-                                        <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                            <TableCell component="th" scope="row" style={{"color":"#fff","paddingLeft":"30px"}}>{row.name}</TableCell>
-                                            <TableCell align="center">{row.Quantity_Completed}</TableCell>
-                                            <TableCell align="center">{row.The_remaining_quantity}</TableCell>
-                                            <TableCell align="center">{row.Number_of_Persons}</TableCell>
-                                            
-                                        </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </>
-                            }
-                        </Table>
-                    </TableContainer>
+                    {
+                        bloc === ''
+                        ?
+                        <div className='flex items-center justify-center md:h-96 h-52 bg-[#3C3D42] rounded-md'>
+                            <span className='md:text-2xl font-bold text-[#202224] text-sm'>Please enter bloc name first</span>
+                        </div>
+                        :
+                        <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
+                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                    <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
+                                    <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
+                                    <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
+                                    <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody className="bg-[#1F2025]">
+                                    {afficherDonner?.map((row , index) => (
+                                    <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                        <TableCell component="th" scope="row" style={{"color":"#fff","paddingLeft":"30px"}}>{row.name}</TableCell>
+                                        <TableCell align="center">{row.Quantity_Completed}</TableCell>
+                                        <TableCell align="center">{row.The_remaining_quantity}</TableCell>
+                                        <TableCell align="center">{row.Number_of_Persons}</TableCell>
+                                        
+                                    </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    }
                 </div>
             </div>
         </>

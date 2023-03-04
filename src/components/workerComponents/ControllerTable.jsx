@@ -63,11 +63,11 @@ export default function BasicTable({speciality } ) {
         {...prev , [e.target.name] : e.target.value ,designation:designationName}
       
         ))}else{
-          const ss=items.find((ele)=>ele.designation ==designationName)
+          const olddonne=items.find((ele)=>ele.designation ==designationName)
           
           //save old date to update 
-          if(ss!=undefined){
-          setEachItem({designation:"",Quantity_Completed:ss.Quantity_Completed,The_remaining_quantity:ss.The_remaining_quantity,Number_of_Persons:ss.Number_of_Persons})
+          if(olddonne!=undefined){
+          setEachItem({designation:"",Quantity_Completed:olddonne.Quantity_Completed,The_remaining_quantity:olddonne.The_remaining_quantity,Number_of_Persons:olddonne.Number_of_Persons})
           }
          
          

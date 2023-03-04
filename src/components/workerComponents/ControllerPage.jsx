@@ -7,14 +7,17 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 
 function ControllerPage() {
-    // create the curent date
-    var curenteDate = new Date();
-    const location = useLocation();
+    
+   
     const [fullName , setFullName] = useState("")
     const [speciality , setSpeciality] = useState("")
+    const [bloc , setBloc] = useState("")
     const [chicklistData , setChicklistData] = useState([])
 
+    //get id of controler he had login
+    const location = useLocation();
     const id = {id:parseInt(location.hash.slice(1))}
+
     useEffect(()=>{
         axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then((res)=>{
             setFullName(res.data.fullName)
@@ -23,38 +26,44 @@ function ControllerPage() {
             console.log(err)
         })
     })
-
+    
+    //ma3rfthach
     const validation = (e)=>{
         e.preventDefault();
         console.log(eachItem)
     }
     
+    // create the curent date
+    var curenteDate = new Date();
+    const day=curenteDate.getDate()<10?`0${curenteDate.getDate()}`:curenteDate.getDate()
+    const month = curenteDate.getMonth()<10?`0${curenteDate.getMonth()+1}`:curenteDate.getMonth()+1
+    const year = curenteDate.getFullYear()
+    const date=month+"/"+day+"/"+year
     return (
         <>
             <Nav fullName={fullName} speciality={speciality}/>
             <div className='px-4 pb-2'>
-                <div className='flex justify-between'>
-                    <select name="list-of-blocs" id="list-of-blocs" className=' w-64 h-7  px-2 rounded-md flex items-center bg-[#3C3D42] text-white focus:outline-none'>
-                        <option value="null">...</option>
-                        <option value="bloc1-A">bloc A</option>
-                        <option value="bloc-B">bloc B</option>
-                        <option value="bloc-C">bloc C</option>
-                        <option value="bloc-E">bloc E</option>
-                    </select>
+                <div className='flex flex-col md:flex-row gap-4 md:justify-between'>
+                    <div className='flex gap-2 items-center'>
+                        <input
+                            className="bg-[#3C3D42] pl-2 h-9 rounded-xl sm:w-64 focus:outline none p-1 text-white text-xs"
+                            type="text"
+                            onChange={(e) => setBloc(e.target.value)}
+                            placeholder="Enter the Bloc"
+                        />
+                    </div>
                     <div className='flex gap-2 items-center'>
                         <Button  style={{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
                             Validation
                             <CheckCircleOutlineRoundedIcon style={{"fontSize":"30px" , "marginLeft":"5px"}}/>
                         </Button>
                         <span className='text-white'>
-                            {curenteDate.getDate()<10?`0${curenteDate.getDate()}`:curenteDate.getDate()}/
-                            {curenteDate.getMonth()<10?`0${curenteDate.getMonth()+1}`:curenteDate.getMonth()+1}/
-                            {curenteDate.getFullYear()}
+                           {date}
                         </span>
                     </div>
                 </div>
                 <div className='pt-2'>
-                    <ControllerTable speciality={speciality} valida={validation} />
+                    <ControllerTable speciality={speciality} date={date} idControler={id.id} blocname={bloc} />
                 </div>
             </div>
         </>

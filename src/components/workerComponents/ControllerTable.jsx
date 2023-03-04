@@ -17,18 +17,17 @@ function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_P
 // style for inputs
 const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs text-center'
 
-export default function BasicTable({speciality } ) {
+export default function BasicTable({speciality,date,idControler,blocname } ) {
   // state have designation
   const [designation , setDesignation] = useState([])
 
+  console.log(blocname)
   //arraye have donne of input par desenation
   const [items , setItems] = useState([])
   
   // obejet par input of designation
-  const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
-
-
-/// get desenation from php
+  const [eachItem , setEachItem] = useState({blocName:blocname,idControler:idControler,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
+  // get desenation from php
   useEffect(()=>{
     if(speciality !== ""){
       axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
@@ -39,7 +38,10 @@ export default function BasicTable({speciality } ) {
     }
   },[speciality])
 
-
+  //test
+  const arraydes=designation?.map((ele)=>({blocName:blocname,idControler:idControler,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
+  
+  console.log(arraydes)
 
 // on change input function
   const handlChange=(e)=>{
@@ -57,15 +59,15 @@ export default function BasicTable({speciality } ) {
     // insert value in first time
     if(eachItem.designation==""){
       setEachItem((prev)=>(
-        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+        {...prev , [e.target.name] : e.target.value ,designation:designationName,blocName:blocname}
       ))
     //insert value in meme obejet
     }else if (designationName==eachItem.designation){
-
     /// if not existe in  array 
     if (serach==false){
+      
       setEachItem((prev)=>(
-        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+        {...prev , [e.target.name] : e.target.value ,designation:designationName,blocName:blocname}
       
         ))}else{
 
@@ -74,7 +76,7 @@ export default function BasicTable({speciality } ) {
           
           //save old date to update 
           if(olddonne!=undefined){
-          setEachItem({designation:"",Quantity_Completed:olddonne.Quantity_Completed,The_remaining_quantity:olddonne.The_remaining_quantity,Number_of_Persons:olddonne.Number_of_Persons})
+          setEachItem({idControler:idControler,dateValidation:date,designation:"",Quantity_Completed:olddonne.Quantity_Completed,The_remaining_quantity:olddonne.The_remaining_quantity,Number_of_Persons:olddonne.Number_of_Persons,blocName:blocname})
           }
          
          
@@ -86,7 +88,7 @@ export default function BasicTable({speciality } ) {
 
        // whene have same desitination we need too insert new objet of the same designation
            setEachItem((prev)=>(
-            {...prev , [e.target.name] : e.target.value ,designation:designationName}
+            {...prev , [e.target.name] : e.target.value ,designation:designationName,blocName:blocname}
           ))
        
       }
@@ -97,9 +99,9 @@ export default function BasicTable({speciality } ) {
       setItems(items => [...items,eachItem] );
 
       //empty setEachItem 
-      setEachItem({designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
+      setEachItem({idControler:idControler,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:blocname})
       setEachItem((prev)=>(
-        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+        {...prev , [e.target.name] : e.target.value ,designation:designationName,blocName:blocname}
       ))
     }
     
@@ -107,7 +109,7 @@ export default function BasicTable({speciality } ) {
   
 console.log(items)
   
-
+// map of designation and create input for each designation
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,
@@ -116,6 +118,7 @@ console.log(items)
     <input type="number" id={ele.designationName} defaultValue={0} name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
    )
   ))
+
 
   if(designation.length !== 0){
     return(

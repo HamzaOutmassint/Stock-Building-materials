@@ -23,6 +23,7 @@ function createData(Designation, quantity, achieve, rendement) {
   };
 }
 
+// le donne in table
 const rows = [
   createData("Bloc 0", "111", "12", "133"),
   createData("Bloc 1", "334", "134", "111"),
@@ -34,6 +35,7 @@ const rows = [
   createData("Bloc 7", "676",  "343", "554"),
   createData("Bloc 8", "453",  "232", "453"),
 ];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

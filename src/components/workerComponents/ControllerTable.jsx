@@ -17,10 +17,10 @@ function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_P
 // style for inputs
 const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs text-center'
 
-export default function BasicTable({speciality , eachItemFromControlerPage}) {
+export default function BasicTable({speciality } ) {
   const [designation , setDesignation] = useState([])
   const [items , setItems] = useState([])
-  const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
+  const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
 
 
 
@@ -34,41 +34,79 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
     }
   },[speciality])
 
+
+
+
   const handlChange=(e)=>{
+
+    // get name designation
     const designationName = e.target.id
+
+    //serach if designation is found in array
+    const serach = items.map((ele)=>{
+      if(ele.designation==designationName){
+        return true
+      }})
+
+
+    // insert value in first time
     if(eachItem.designation==""){
-    setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value ,designation:designationName}
-    ))
-  }else if (designationName==eachItem.designation){
-    setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value ,designation:designationName}
-    ))
-  }else if(designationName!=eachItem.designation){
-    setItems(items => [...items,eachItem] );
-    setEachItem({designation:"",Quantity_Completed:"",The_remaining_quantity:"",Number_of_Persons:""})
-    setEachItem((prev)=>(
-      {...prev , [e.target.name] : e.target.value ,designation:designationName}
-    ))
-  }else{
-    items.map((ele)=>(
-      ele.designation?designationName==eachItem.designation
-    ))
+      setEachItem((prev)=>(
+        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+      ))
+    //insert value in meme obejet
+    }else if (designationName==eachItem.designation){
+
+    /// if not ixesite in objet and array
+    if (serach==false){
+      setEachItem((prev)=>(
+        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+      
+        ))}else{
+          const ss=items.find((ele)=>ele.designation ==designationName)
+          
+          //save old date to update 
+          if(ss!=undefined){
+          setEachItem({designation:"",Quantity_Completed:ss.Quantity_Completed,The_remaining_quantity:ss.The_remaining_quantity,Number_of_Persons:ss.Number_of_Persons})
+          }
+         
+         
+          
+       //updtaing array 
+        setItems( items.filter((ele)=>
+         ele.designation !==designationName
+           ))
+
+       // whene have same desitination we need too insert new objet of the same designation
+           setEachItem((prev)=>(
+            {...prev , [e.target.name] : e.target.value ,designation:designationName}
+          ))
+       
+      }
+   //insert value in othere objet and boch first objet in array items
+    }else if(designationName!=eachItem.designation  ){
+
+      //appned in array items
+      setItems(items => [...items,eachItem] );
+
+      //valide echeitems 
+      setEachItem({designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
+      setEachItem((prev)=>(
+        {...prev , [e.target.name] : e.target.value ,designation:designationName}
+      ))
+    }
     
-  }
 }
-  console.log(eachItem)
-  console.log(items)
-  const valid=(designationName)=>{
-    console.log(eachItem)
-  }
+  
+console.log(items)
+  
 
   const afficherDonner = designation?.map((ele,key)=>(
    createData(
     ele.designationName,
-    <input type="number" id={ele.designationName} defaultValue="0" name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
-    <input type="number" id={ele.designationName} defaultValue="0" name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
-    <input type="number" id={ele.designationName} defaultValue="0" name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
+    <input type="number" id={ele.designationName} defaultValue={0} name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle}/>,
+    <input type="number" id={ele.designationName} defaultValue={0} name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle}/>,
+    <input type="number" id={ele.designationName} defaultValue={0} name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle}/>
    )
   ))
 
@@ -82,7 +120,6 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
               <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
               <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
               <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
-              <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody className="bg-[#1F2025]">
@@ -92,12 +129,7 @@ export default function BasicTable({speciality , eachItemFromControlerPage}) {
                 <TableCell align="center">{row.Quantity_Completed}</TableCell>
                 <TableCell align="center">{row.The_remaining_quantity}</TableCell>
                 <TableCell align="center">{row.Number_of_Persons}</TableCell>
-                <TableCell align="center">
-                  <Button style={{"backgroundColor":"#BBE1FA", "color":"#1b1919" ,"textTransform":"lowercase","fontWeight":600,"width": "100px"}}
-                    onClick={()=>valid(row.name)}>
-                    valid
-                  </Button>
-                </TableCell>
+                
               </TableRow>
             ))}
           </TableBody>

@@ -42,7 +42,7 @@ function ControllerPage() {
                         <option value="bloc-E">bloc E</option>
                     </select>
                     <div className='flex gap-2 items-center'>
-                        <Button style={{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={(e)=>validation(e)}>
+                        <Button  style={{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
                             Validation
                             <CheckCircleOutlineRoundedIcon style={{"fontSize":"30px" , "marginLeft":"5px"}}/>
                         </Button>
@@ -54,7 +54,7 @@ function ControllerPage() {
                     </div>
                 </div>
                 <div className='pt-2'>
-                    <ControllerTable speciality={speciality}/>
+                    <ControllerTable speciality={speciality} valida={validation} />
                 </div>
             </div>
         </>

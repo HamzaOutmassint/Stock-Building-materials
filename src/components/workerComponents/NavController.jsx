@@ -24,9 +24,9 @@ export default function Nav({fullName , speciality}) {
           </div>
         </div>
         <div className="flex">
-          <Link to='/' className="bg-[#6e92e8] text-white w-full justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
+          <Link to='/' className="bg-[#6e92e8] text-white w-full gap-1 justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
             <span className="md:block hidden">Logout</span>
-            <img src={logout} alt="" className="w-8 h-6"/>
+            <img src={logout} alt="" className="w-6  "/>
           </Link>
         </div>
       </div>

@@ -182,14 +182,14 @@ function ControllerPage() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-useEffect(() => {
-     // 👇️ only runs once
-     const arraydes=designation?.map((ele)=>({blocName:bloc,idControler:id.id,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
+// useEffect(() => {
+//      // 👇️ only runs once
+//      const arraydes=designation?.map((ele)=>({blocName:bloc,idControler:id.id,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
 
-     console.log("hello",arraydes);
-     setItems(items => [...items,arraydes] );
+//      console.log("hello",arraydes);
+//      setItems(items => [...items,arraydes] );
     
-  }, [])
+//   }, [])
 
     return (
         <>

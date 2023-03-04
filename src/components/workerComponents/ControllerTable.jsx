@@ -57,12 +57,14 @@ export default function BasicTable({speciality } ) {
     //insert value in meme obejet
     }else if (designationName==eachItem.designation){
 
-    /// if not ixesite in objet and array
+    /// if not existe in  array 
     if (serach==false){
       setEachItem((prev)=>(
         {...prev , [e.target.name] : e.target.value ,designation:designationName}
       
         ))}else{
+
+          //find old date
           const olddonne=items.find((ele)=>ele.designation ==designationName)
           
           //save old date to update 
@@ -83,13 +85,13 @@ export default function BasicTable({speciality } ) {
           ))
        
       }
-   //insert value in othere objet and boch first objet in array items
+   //insert objet in items and get empty setEachItem
     }else if(designationName!=eachItem.designation  ){
 
       //appned in array items
       setItems(items => [...items,eachItem] );
 
-      //valide echeitems 
+      //empty setEachItem 
       setEachItem({designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
       setEachItem((prev)=>(
         {...prev , [e.target.name] : e.target.value ,designation:designationName}

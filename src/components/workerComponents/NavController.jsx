@@ -9,7 +9,7 @@ export default function Nav({fullName , speciality}) {
     <div className="p-4 relative ">
       <div className="w-full bg-[#1F2025] p-3 rounded-lg flex justify-between items-center">
         <div className="flex gap-4">
-          <div className="">
+          <div className=" flex items-center">
             <img
               src={Navcontr}
               alt=""
@@ -20,13 +20,13 @@ export default function Nav({fullName , speciality}) {
             <span className="font-mono font-bold">
               {fullName}
             </span>
-            <span className="font-mono font-thin text-sm">{speciality}</span>
+            <span className="font-mono font-thin ">{speciality}</span>
           </div>
         </div>
         <div className="flex">
-          <Link to='/' className="bg-[#6e92e8] text-white w-24 justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
-            <span>Logout</span>
-            <img src={logout} alt="" className="w-5 h-5"/>
+          <Link to='/' className="bg-[#6e92e8] text-white w-full justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
+            <span className="md:block hidden">Logout</span>
+            <img src={logout} alt="" className="w-8 h-6"/>
           </Link>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function Nav() {
     <div className="p-2 relative ">
       <div className="w-full bg-[#1F2025] p-3 rounded-lg flex justify-between items-center">
         <div className="flex gap-4">
-          <div className="">
+          <div className="flex items-center">
             <img
               src={Navcontr}
               alt=""

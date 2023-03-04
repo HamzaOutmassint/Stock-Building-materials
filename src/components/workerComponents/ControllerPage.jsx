@@ -54,7 +54,7 @@ function ControllerPage() {
                     </div>
                 </div>
                 <div className='pt-2'>
-                    <ControllerTable speciality={speciality} pushItem={pushItemFunction}/>
+                    <ControllerTable speciality={speciality}/>
                 </div>
             </div>
         </>

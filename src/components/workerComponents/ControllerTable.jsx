@@ -18,12 +18,17 @@ function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_P
 const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs text-center'
 
 export default function BasicTable({speciality } ) {
+  // state have designation
   const [designation , setDesignation] = useState([])
+
+  //arraye have donne of input par desenation
   const [items , setItems] = useState([])
+  
+  // obejet par input of designation
   const [eachItem , setEachItem] = useState({designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
 
 
-
+/// get desenation from php
   useEffect(()=>{
     if(speciality !== ""){
       axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
@@ -36,7 +41,7 @@ export default function BasicTable({speciality } ) {
 
 
 
-
+// on change input function
   const handlChange=(e)=>{
 
     // get name designation

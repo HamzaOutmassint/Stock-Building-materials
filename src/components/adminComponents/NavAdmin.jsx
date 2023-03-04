@@ -47,12 +47,12 @@ export default function Nav() {
                 Add new worker
               </span>
             </NavLink>
-            <NavLink to="/" className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
+            <a href="/" onClick={()=>localStorage.removeItem("AdminToken")} className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
               <img src={logout} alt="" className="w-6" />
               <span className="text-center font-mono font-bold text-white text-xl">
                 Déconnexion
               </span>
-            </NavLink>
+            </a>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import NavAdmin from "./NavAdmin";
 import next from "../../assets/next.png"
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import axios from "axios";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -64,11 +65,23 @@ export default function Add_new_Worker() {
     }))
   }
 
+  // this to handl the error and the seccess
+  const [dataReturn , setDataReturn] = useState(null)
+
   // this execute whene admin click on button add new controler
-  const AddNewController=(e)=>{
+  const AddNewController= async (e)=>{
     e.preventDefault();
-    console.log(dataControler)
-    console.log(dataLogin)
+    // console.log(dataControler)
+    // console.log(dataLogin)
+    // console.log({dataControler:dataControler , dataLogin:dataLogin})
+    await axios.post("http://localhost/project_atlass/addControler.php",{dataControler:dataControler , dataLogin:dataLogin})
+    .then((res)=>{
+      console.log(res.data)
+      setDataReturn(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+
     setOpen(true);
     setNextStep(false)
   }
@@ -205,11 +218,25 @@ export default function Add_new_Worker() {
                   </div>
                 </form>
               }
-              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                  This is a success message!
-                </Alert>
-              </Snackbar>
+              {
+                open !== false
+                ?
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                  {
+                    dataReturn.success
+                    ?
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                      {dataReturn.message}
+                    </Alert>
+                    :
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                      {dataReturn.message}
+                    </Alert>
+                  }
+                </Snackbar>
+                :
+                null
+              }
           </div>
         </div>
       </div>

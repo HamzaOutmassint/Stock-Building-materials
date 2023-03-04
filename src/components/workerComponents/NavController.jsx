@@ -1,9 +1,17 @@
 import Navcontr from "../../assets/Navcontr.png";
-import { Link } from "react-router-dom";
 import logout from "../../assets/logout.png"
+import { useNavigate } from "react-router-dom";
 
 
 export default function Nav({fullName , speciality}) {
+  const navigate = useNavigate();
+
+  const Logout=()=>{
+    localStorage.removeItem("WorkerToken")
+    localStorage.removeItem("id")
+    navigate("/")
+    window.location.reload()
+}
 
   return (
     <div className="p-4 relative ">
@@ -24,10 +32,10 @@ export default function Nav({fullName , speciality}) {
           </div>
         </div>
         <div className="flex">
-          <Link to='/' className="bg-[#6e92e8] text-white w-full gap-1 justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
+          <button onClick={()=>Logout()} className="bg-[#6e92e8] text-white w-full gap-1 justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
             <span className="md:block hidden">Logout</span>
             <img src={logout} alt="" className="w-6  "/>
-          </Link>
+          </button>
         </div>
       </div>
     </div>

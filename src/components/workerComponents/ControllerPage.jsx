@@ -37,7 +37,6 @@ function ControllerPage() {
     const [designation , setDesignation] = useState([])
     //arraye have donne of input par desenation
     const [items , setItems] = useState([])
-    console.log(items)
     
 
 /////////////////////////////////////////////////////////////////////////////////////////get id of controler he had login ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -182,14 +181,12 @@ function ControllerPage() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-useEffect(() => {
-     // 👇️ only runs once
-     const arraydes=designation?.map((ele)=>({blocName:bloc,idControler:id.id,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
-
-     console.log("hello",arraydes);
-     setItems(items => [...items,arraydes] );
-    
-  }, [])
+    useEffect(() => {
+        // 👇️ only runs once
+        const arraydes=designation?.map((ele)=>({blocName:bloc,idControler:id.id,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
+        setItems(items => [...items,arraydes] );
+        
+    }, [])
 
     return (
         <>
@@ -223,7 +220,7 @@ useEffect(() => {
                                 ?
                                 <thead className='h-auto'>
                                     <tr className='flex items-center justify-center h-96'>
-                                        <td className='text-2xl font-bold text-[#202224]'>Please enter bloc name first</td>
+                                        <td className='md:text-2xl font-bold text-[#202224]'>Please enter bloc name first</td>
                                     </tr>
                                 </thead>
                                 :

@@ -1,5 +1,4 @@
 import Nav from './NavController'
-
 import { Button } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useLocation } from 'react-router-dom';

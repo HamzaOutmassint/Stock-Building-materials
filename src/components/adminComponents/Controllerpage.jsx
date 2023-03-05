@@ -13,10 +13,10 @@ export default function Controllerpage() {
       <Nav />
       <div className="p-2  ">
         <section className="pb-2">
-          <div className="flex  sm:justify-end gap-6">
+          <div className="flex  sm:justify-end gap-3">
             <div>
               <input
-                className="bg-[#3C3D42] pl-2 h-9 rounded-xl sm:w-64 focus:outline none p-1 text-white text-xs"
+                className="bg-[#3C3D42] pl-1 h-9 rounded-xl sm:w-64 focus:outline none p-1 text-white text-xs"
                 type="text"
                 onChange={(e) => setSearchname(e.target.value)}
                 placeholder="Search for ... "

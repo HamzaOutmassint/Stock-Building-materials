@@ -142,10 +142,10 @@ export default function Add_new_Worker() {
                       <label htmlFor="specialty" className="mb-1">Specialty : </label>
                       <select onChange={(e)=>handlInputChangeInStepOne(e)} defaultValue={'DEFAULT'} required className="bg-[#4B484C] rounded-md h-8 w-auto focus:outline-none pl-2" name="specialty" id="specialty" style={{"fontSize":"20px","color":"lightgray"}}>
                         <option value="DEFAULT" disabled>...</option>
-                        <option value="Electricity">Electricity</option>
-                        <option value="Air_conditioner">Air conditioner</option>
+                        <option value="Electricite">Electricite</option>
+                        <option value="Climatisation">Climatisation</option>
                         <option value="Ventilation">Ventilation</option>
-                        <option value="Plumbing">Plumbing</option>
+                        <option value="Plomberie">Plomberie</option>
                       </select>
                     </div>
                     <div className="flex flex-col text-white  mb-1">

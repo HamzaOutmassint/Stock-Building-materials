@@ -13,57 +13,26 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-function createData(name, Id_card, Phone, Specialty, See_detail) {
-  return {
-    name,
-    Id_card,
-    Phone,
-    Specialty,
-    See_detail,
-  };
-}
-
-const rows = [
-  createData("hamza outmassint", "EE12450", "0602314804", "Electricity", "see more details"),
-  createData("salah elfatimi", "EE11615", "0625451554", "Plumbing", "see more details"),
-  createData("walid katir", "EE45871", "0615489562", "Ventilation", "see more details"),
-  createData("hicham radi", "EE15021", "0653127586", "Air conditioner", "see more details"),
-  createData("youssef radi", "EE65487", "0612658745", "Plumbing", "see more details"),
-  createData("khalid bouskso", "EE21547", "0612457812", "Air conditioner", "see more details"),
-  createData("norddin amezwar", "EE13254", "0698547826", "Ventilation", "see more details"),
-  createData("samir mglawi", "EE14875", "0612325487", "Plumbing", "see more details"),
-  createData("imran sdjhds", "EE95847", "0645789512", "Electricity", "see more details"),
-];
-
+function createData(name, Id_card, Phone, Specialty, See_detail) { return { name, Id_card, Phone, Specialty, See_detail,};}
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
+  if (b[orderBy] < a[orderBy]) { return -1;}
+  if (b[orderBy] > a[orderBy]) {return 1;}
   return 0;
 }
-
 function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
+  return order === "desc" ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
+    if (order !== 0) { return order;}
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 const headCells = [
   {
     id: "name",
@@ -98,10 +67,7 @@ const headCells = [
 
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
+  const createSortHandler = (property) => (event) => { onRequestSort(event, property);};
   return (
     <TableHead className="bg-[#3C3D42]">
       <TableRow>
@@ -134,7 +100,6 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
-
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
@@ -143,34 +108,60 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function AdminTable() {
+  const [workers , setWorkers]= React.useState([])
+
+
+  /*-------------------------get data of all workers-------------------------*/
+
+  React.useEffect(()=>{
+    axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
+      setWorkers(res.data)
+    }).catch(err=>{
+      console.error(err);
+    })
+  },[])
+
+  /*-----------------------------------end------------------------------------*/
+
+  /*----------------------------show data workers in table-------------------- */
+
+  const rows = workers?.map(ele=>(
+    createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+  ));
+
+  /*-----------------------------------end------------------------------------*/
+
+
+
+  /*---------------------------------------------------------------------- */
+    //       all this is for datatable don't change anything here        //
+  /*----------------------------------------------------------------------- */
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("Id_card");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
-
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  /*--------------------------------------------------------------------------- */
+    //                                 end                                    //
+  /*--------------------------------------------------------------------------- */
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -196,7 +187,7 @@ export default function AdminTable() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      // onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
                       key={row.name}
                     >
@@ -205,7 +196,7 @@ export default function AdminTable() {
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Phone}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
                       <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
-                        <NavLink to="../DetailsController"  className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
+                        {row.See_detail}
                       </TableCell>
                     </TableRow>
                   );

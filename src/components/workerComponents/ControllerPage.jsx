@@ -15,22 +15,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_Persons) {
-    return { name,Quantity_Completed, The_remaining_quantity, Number_of_Persons };
-  }
- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-
+    function createData(name,Quantity_Completed, The_remaining_quantity, Number_of_Persons) {
+        return { name,Quantity_Completed, The_remaining_quantity, Number_of_Persons };
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////// style for inputs/////////////////////////////////////////////////////////////////////////////////////////
 const InputStyle = 'bg-[#4B484C] rounded-sm focus:outline none p-1 text-white text-xs text-center'
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-
 function ControllerPage() {
-    
-////////////////////////////////////////////////////////////////////////////////////////useState///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-
     const [fullName , setFullName] = useState("")
     const [speciality , setSpeciality] = useState("")
     const [bloc , setBloc] = useState("")
@@ -82,8 +76,7 @@ function ControllerPage() {
         } 
     }
     
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-
+/////////////////////////////////////////////////////////////insert data that entered by worker to database////////////////////////////////////////////////////////////////////////////////////////////////////// 
     useEffect(()=>{
         if(items.length !== 0){
             axios.post("http://localhost/project_atlass/addDataOfBuildingMateriale.php",items)
@@ -96,7 +89,6 @@ function ControllerPage() {
         }
     },[addDataOfBuildingMaterial])
 
-
 ///////////////////////////////////////////////////serach of controler if valide////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(()=>{
     
@@ -108,15 +100,11 @@ function ControllerPage() {
 
     },[date,id])
     
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-
-
 //////////////////////////////////////////////////////////////////// obejet par input of designation/////////////////////////////////////////////////////////////////////////////////////////
     const [eachItem , setEachItem] = useState({blocName:bloc,idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0})
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-///////////////////////////////////////////////////get desenation from php////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////get desenation from database////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(()=>{
         if(speciality !== ""){
             axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
@@ -196,12 +184,12 @@ function ControllerPage() {
     
 //////////////////////////////////////////// map of designation and create input for each designation///////////////////////////////////////////////////////////////////////////////////////////
         const afficherDonner = designation?.map((ele,key)=>(
-        createData(
-            ele.designationName,
-            <input type="number" id={ele.designationName} defaultValue={0} name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle} style={bloc===''?{"pointerEvents":"none"}:null}/>,
-            <input type="number" id={ele.designationName} defaultValue={0} name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle} style={bloc===''?{"pointerEvents":"none"}:null}/>,
-            <input type="number" id={ele.designationName} defaultValue={0} name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle} style={bloc===''?{"pointerEvents":"none"}:null}/>
-        )
+            createData(
+                ele.designationName,
+                <input type="number" id={ele.designationName} defaultValue={0} name='Quantity_Completed' onChange={(e)=>handlChange(e)}  className={InputStyle} style={bloc===''?{"pointerEvents":"none"}:null}/>,
+                <input type="number" id={ele.designationName} defaultValue={0} name='The_remaining_quantity' onChange={(e)=>handlChange(e)} className={InputStyle} style={bloc===''?{"pointerEvents":"none"}:null}/>,
+                <input type="number" id={ele.designationName} defaultValue={0} name='Number_of_Persons' onChange={(e)=>handlChange(e)} className={InputStyle} style={bloc===''?{"pointerEvents":"none"}:null}/>
+            )
         ))
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -290,7 +278,6 @@ function ControllerPage() {
                                                 <TableCell align="center">{row.Quantity_Completed}</TableCell>
                                                 <TableCell align="center">{row.The_remaining_quantity}</TableCell>
                                                 <TableCell align="center">{row.Number_of_Persons}</TableCell>
-                                                
                                             </TableRow>
                                             ))}
                                         </TableBody>

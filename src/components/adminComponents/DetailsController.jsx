@@ -16,14 +16,14 @@ export default function DetailsController() {
         <section className="pb-2 flex flex-col md:items-center space-y-4 md:space-y-0 md:flex-row md:justify-between gap-2">
           <div className="flex items-center gap-6">
             <div>
-              <select name="" id="" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
-                <option selected>All Bloc</option>
+              <select defaultValue="all_bloc" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
+                <option value='all_bloc'>All Bloc</option>
                 <option value="1">1</option>
               </select>
             </div>
             <div className="flex gap-4 items-center">
-              <select name="" id="" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
-                <option selected>All date</option>
+              <select defaultValue="all_date" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
+                <option value="all_date">All date</option>
                 <option value="1">1</option>
               </select>
             </div>

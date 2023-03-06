@@ -192,7 +192,6 @@ export default function AdminTable() {
 
                   return (
                     <TableRow
-                    
                       hover
                       onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}

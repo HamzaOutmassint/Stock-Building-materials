@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function Login() {
   const navigate = useNavigate();
   const [loginData , setLoginData] =useState({ username:"", password:"" });
+  const [valid , setValid] = useState(true)
 
   const handlChange=(e)=>{
     const name=e.target.name;
@@ -17,15 +18,20 @@ export default function Login() {
   function handelSbmite(){
 
     axios.post("http://localhost/project_atlass/Login_admin.php",loginData).then((res)=>{
-      if(res.data.whoLogged === "admin"){
-        navigate("/admin")
-        localStorage.setItem("AdminToken",res.data.token)
-        window.location.reload()
-      }else if(res.data.whoLogged === "controler"){
-        navigate(`/worker/#${res.data.idControler}`)
-        localStorage.setItem("WorkerToken",res.data.token)
-        localStorage.setItem("id",res.data.idControler)
-        window.location.reload()
+      if(res.data.success === false){
+        setValid(false)
+      }else{
+        setValid(true)
+        if(res.data.whoLogged === "admin"){
+          navigate("/admin")
+          localStorage.setItem("AdminToken",res.data.token)
+          window.location.reload()
+        }else if(res.data.whoLogged === "controler"){
+          navigate(`/worker/#${res.data.idControler}`)
+          localStorage.setItem("WorkerToken",res.data.token)
+          localStorage.setItem("id",res.data.idControler)
+          window.location.reload()
+        }
       }
     }).catch((err)=>{
       console.log(err)
@@ -40,6 +46,15 @@ export default function Login() {
             Login
           </h1>
         </div>
+        {
+          valid === false
+          ?
+            <ul style={{"backgroundColor":"#f31c40" , "fontSize":"18px","padding":"10px"}}>
+              <li>incorrect username or password. try again</li>
+            </ul>
+          : 
+            null
+        }
         <div  className="space-y-4">
           <div>
             <label htmlFor="username" className=" text-lg font-mono ">

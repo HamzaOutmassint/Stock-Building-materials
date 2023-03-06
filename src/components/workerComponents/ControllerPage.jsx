@@ -1,5 +1,4 @@
 import Nav from './NavController'
-
 import { Button } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useLocation } from 'react-router-dom';
@@ -72,19 +71,20 @@ function ControllerPage() {
 /////////////////////////////////////////////////////////////////////////////////////////validation///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
     const validation = (e)=>{
-    if(eachItem.designation!=""){
-        //appned in array items
-        setItems(items => [...items,eachItem] );
+        if(eachItem.designation!==""){
+            //appned in array items
+            setItems(items => [...items,eachItem] );
 
-     //empty setEachItem 
-     setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
-     
-    //  setItems([])
+        //empty setEachItem 
+        setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
+        
+        //  setItems([])
+        }
+    
+        else{
+            console.log("nothing")
+        } 
     }
-   
-    else{
-        console.log("nething")
-    } }
     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 

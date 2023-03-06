@@ -3,6 +3,8 @@ import { Button } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import modify from "../../assets/write.png"
+import enter from "../../assets/enter.png"
 import axios from "axios";
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -32,6 +34,8 @@ function ControllerPage() {
     const [fullName , setFullName] = useState("")
     const [speciality , setSpeciality] = useState("")
     const [bloc , setBloc] = useState("")
+    const [blocentre , setBlocentre] = useState(false)
+    const [Modify , setModify] = useState(false)
     // state have designation
     const [designation , setDesignation] = useState([])
     //arraye have donne of input par desenation
@@ -178,6 +182,8 @@ function ControllerPage() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
         
+
+
 //////////////////////////////////////////// map of designation and create input for each designation///////////////////////////////////////////////////////////////////////////////////////////
         const afficherDonner = designation?.map((ele,key)=>(
         createData(
@@ -189,6 +195,25 @@ function ControllerPage() {
         ))
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////Modify button input bloc/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const ModifyBloc=()=>{
+    setBloc("")
+    document.getElementById("blocinput").value=""
+    setItems([])
+    setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
+    setModify(true)
+    setBlocentre(false)
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// button entre bloc////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const Blocentre=()=>{
+    setBlocentre(true)
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // useEffect(() => {
 //      // 👇️ only runs once
@@ -206,15 +231,24 @@ function ControllerPage() {
                 <div className='flex flex-col md:flex-row gap-4 md:justify-between'>
                     <div className='flex gap-2 items-center'>
                         <input
-                            className="bg-[#3C3D42] pl-2 h-9 rounded-xl sm:w-64 focus:outline none p-1 text-white text-xs"
+                            className="bg-[#3C3D42] pl-4 h-9 rounded-xl sm:w-64 focus:outline none  p-1 text-white text-xs"
                             type="text"
-                            onBlur={(e) => setBloc(e.target.value)}
+                            onChange={(e) => setBloc(e.target.value)}
                             placeholder="Enter the Bloc"
-                            style={bloc!==""?{"pointerEvents":"none"}:null}
+                            style={blocentre==true?{"pointerEvents":"none"}:null}
+                            id="blocinput"
                         />
+                       <button style={blocentre==false?{"pointerEvents":"none"}:null} className='absolute left-36 sm:left-60'>
+                        <img src={modify} className="w-5  " alt="" onClick={ModifyBloc} />
+                        </button>
+                       <button onClick={Blocentre}  style={blocentre==true?{"pointerEvents":"none"}:null} 
+                        className=' text-white text-center justify-items-center flex bg-[#04AA6D] py-1 px-2 rounded-md font-medium   '>
+                        <span >Add bloc</span>
+                       </button>
                     </div>
+
                     <div className='flex gap-2 items-center'>
-                        <Button id="valid"  style={bloc===""?{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600, "pointerEvents":"none"}:{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
+                        <Button id="valid"  style={blocentre==false?{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600, "pointerEvents":"none"}:{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
                             Validation
                             <CheckCircleOutlineRoundedIcon style={{"fontSize":"30px" , "marginLeft":"5px"}}/>
                         </Button>
@@ -225,7 +259,7 @@ function ControllerPage() {
                 </div>
                 <div className='pt-2'>
                     {
-                        bloc === ''
+                        blocentre ==false
                         ?
                         <div className='flex items-center justify-center md:h-96 h-52 bg-[#3C3D42] rounded-md'>
                             <span className='md:text-2xl font-bold text-[#202224] text-sm'>Please enter bloc name first</span>

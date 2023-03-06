@@ -36,7 +36,8 @@ function ControllerPage() {
     const [designation , setDesignation] = useState([])
     //arraye have donne of input par desenation
     const [items , setItems] = useState([])
-    console.log(items)
+    const [addDataOfBuildingMaterial , setAddDataOfBuildingMaterial] = useState(false)
+    // console.log(items)
 
 /////////////////////////////////////////////////////////////////////////////////////////get id of controler he had login ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
@@ -60,30 +61,38 @@ function ControllerPage() {
      const day=curenteDate.getDate()<10?`0${curenteDate.getDate()}`:curenteDate.getDate()
      const month = curenteDate.getMonth()<10?`0${curenteDate.getMonth()+1}`:curenteDate.getMonth()+1
      const year = curenteDate.getFullYear()
-     const date=month+"/"+day+"/"+year
+     const date=year+"/"+month+"/"+day
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-/////////////////////////////////////////////////////////////////////////////////////////validation///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////////////////////validation////////////////////////////////////////////////////////////////////////////////////
 
     const validation = (e)=>{
         if(eachItem.designation!==""){
             //appned in array items
             setItems(items => [...items,eachItem] );
 
-        //empty setEachItem 
-        setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
+            //empty setEachItem 
+            setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
         
-        //  setItems([])
-        }
-    
-        else{
-            console.log("nothing")
+            //  setItems([])
+            setAddDataOfBuildingMaterial(!addDataOfBuildingMaterial)
         } 
     }
     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
+    useEffect(()=>{
+        if(items.length !== 0){
+            axios.post("http://localhost/project_atlass/addDataOfBuildingMateriale.php",items)
+            .then(res=>{
+                console.log(res.data)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+    },[addDataOfBuildingMaterial])
 
 //////////////////////////////////////////////////////////////////// obejet par input of designation/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -94,11 +103,11 @@ function ControllerPage() {
 ///////////////////////////////////////////////////get desenation from php////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(()=>{
         if(speciality !== ""){
-        axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
-            setDesignation(res.data.designationName)
-        }).catch((err)=>{
-            console.log(err)
-        })
+            axios.post("http://localhost/project_atlass/getDesignation.php",{speciality:speciality}).then((res)=>{
+                setDesignation(res.data.designationName)
+            }).catch((err)=>{
+                console.log(err)
+            })
         }
     },[speciality])
 

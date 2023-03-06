@@ -10,7 +10,7 @@ export default function Nav({fullName , speciality}) {
     localStorage.removeItem("WorkerToken")
     localStorage.removeItem("id")
     
-    window.location.reload()
+    
 }
 
   return (

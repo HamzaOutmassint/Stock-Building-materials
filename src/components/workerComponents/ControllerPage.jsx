@@ -36,6 +36,7 @@ function ControllerPage() {
     const [bloc , setBloc] = useState("")
     const [blocentre , setBlocentre] = useState(false)
     const [Modify , setModify] = useState(false)
+    const [validDone , setValideDone] = useState(false)
     // state have designation
     const [designation , setDesignation] = useState([])
     //arraye have donne of input par desenation
@@ -87,7 +88,6 @@ function ControllerPage() {
         if(items.length !== 0){
             axios.post("http://localhost/project_atlass/addDataOfBuildingMateriale.php",items)
             .then(res=>{
-                localStorage.setItem("currentDate",res.data.date);
                 window.location.reload()
             })
             .catch(err=>{
@@ -95,6 +95,22 @@ function ControllerPage() {
             })
         }
     },[addDataOfBuildingMaterial])
+
+
+///////////////////////////////////////////////////serach of controler if valide////////////////////////////////////////////////////////////////////////////////////////////
+    useEffect(()=>{
+    
+        axios.post("http://localhost/project_atlass/serachControlerValide.php",{"date":date,"id":id.id}).then((res)=>{
+            setValideDone(res.data.success)
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    },[date,id])
+    
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
 
 //////////////////////////////////////////////////////////////////// obejet par input of designation/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -114,6 +130,7 @@ function ControllerPage() {
     },[speciality])
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
 
     // ba9ii m3aha
     // const arraydes=designation?.map((ele)=>({blocName:bloc,idControler:id.id,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
@@ -223,20 +240,20 @@ function ControllerPage() {
                             type="text"
                             onChange={(e) => setBloc(e.target.value)}
                             placeholder="Enter the Bloc"
-                            style={localStorage.getItem("currentDate") === date ? {"pointerEvents":"none"} : null}
+                            style={ validDone ===true ? {"pointerEvents":"none"} : null}
                             id="blocinput"
                         />
                        <button style={blocentre==false?{"pointerEvents":"none"}:null} className='absolute left-36 sm:left-60'>
                             <img src={modify} className="w-5 " alt="" onClick={ModifyBloc} />
                         </button>
-                       <button onClick={(e)=>AddBloc(e)}  style={blocentre === true || localStorage.getItem("currentDate") === date?{"pointerEvents":"none"}:null} 
+                       <button onClick={(e)=>AddBloc(e)}  style={blocentre === true ||  validDone ===true?{"pointerEvents":"none"}:null} 
                         className=' text-white text-center justify-items-center flex bg-[#04AA6D] py-1 px-2 rounded-md font-medium   '>
                             <span >Add bloc</span>
                        </button>
                     </div>
 
                     <div className='flex gap-2 items-center'>
-                        <Button id="valid"  style={blocentre===false || localStorage.getItem("currentDate") === date ?{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600, "pointerEvents":"none"}:{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
+                        <Button id="valid"  style={blocentre===false ||  validDone ===true ?{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600, "pointerEvents":"none"}:{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
                             Validation
                             <CheckCircleOutlineRoundedIcon style={{"fontSize":"30px" , "marginLeft":"5px"}}/>
                         </Button>
@@ -247,10 +264,10 @@ function ControllerPage() {
                 </div>
                 <div className='pt-2'>
                     {
-                        localStorage.getItem("currentDate") === date 
+                        validDone ===true
                         ?
                             <div className='flex items-center justify-center md:h-96 h-52 bg-[#3C3D42] rounded-md'>
-                                <span className='md:text-2xl font-bold text-[#202224] text-sm'>You have validate the data for today, see you tomorrow</span>
+                                <span className='md:text-2xl font-bold text-[#202224] text-sm'>You have validate  for today, see you tomorrow</span>
                             </div>
                         :
                             blocentre === false

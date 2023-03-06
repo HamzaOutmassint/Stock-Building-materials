@@ -17,7 +17,7 @@ export default function Nav() {
             <img
               src={Navcontr}
               alt=""
-              className="w-12 bg-[#93FBA4] rounded-full"
+              className="w-12  bg-[#93FBA4] rounded-full"
             />
           </div>
           <div className="flex flex-col text-white">

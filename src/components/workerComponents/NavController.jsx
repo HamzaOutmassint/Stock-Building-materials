@@ -9,7 +9,7 @@ export default function Nav({fullName , speciality}) {
   const Logout=()=>{
     localStorage.removeItem("WorkerToken")
     localStorage.removeItem("id")
-    navigate("/")
+    
     window.location.reload()
 }
 
@@ -32,10 +32,12 @@ export default function Nav({fullName , speciality}) {
           </div>
         </div>
         <div className="flex">
+          <a href="/">
           <button onClick={()=>Logout()} className="bg-[#6e92e8] text-white w-full gap-1 justify-between	 p-2 rounded-md flex items-center font-medium hover:bg-[#4774dc] transition duration-300">
             <span className="md:block hidden">Logout</span>
             <img src={logout} alt="" className="w-6  "/>
           </button>
+          </a>
         </div>
       </div>
     </div>

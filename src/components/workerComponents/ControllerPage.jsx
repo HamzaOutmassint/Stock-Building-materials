@@ -41,7 +41,6 @@ function ControllerPage() {
     //arraye have donne of input par desenation
     const [items , setItems] = useState([])
     const [addDataOfBuildingMaterial , setAddDataOfBuildingMaterial] = useState(false)
-    // console.log(items)
 
 /////////////////////////////////////////////////////////////////////////////////////////get id of controler he had login ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
@@ -78,8 +77,6 @@ function ControllerPage() {
 
             //empty setEachItem 
             setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
-        
-            //  setItems([])
             setAddDataOfBuildingMaterial(!addDataOfBuildingMaterial)
         } 
     }
@@ -90,7 +87,8 @@ function ControllerPage() {
         if(items.length !== 0){
             axios.post("http://localhost/project_atlass/addDataOfBuildingMateriale.php",items)
             .then(res=>{
-                console.log(res.data)
+                localStorage.setItem("currentDate",res.data.date);
+                window.location.reload()
             })
             .catch(err=>{
                 console.log(err)
@@ -181,9 +179,7 @@ function ControllerPage() {
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-        
-
-
+    
 //////////////////////////////////////////// map of designation and create input for each designation///////////////////////////////////////////////////////////////////////////////////////////
         const afficherDonner = designation?.map((ele,key)=>(
         createData(
@@ -197,36 +193,24 @@ function ControllerPage() {
 
 ///////////////////////////////////////////////////////////////////////Modify button input bloc/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ModifyBloc=()=>{
-    setBloc("")
-    document.getElementById("blocinput").value=""
-    setItems([])
-    setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
-    setModify(true)
-    setBlocentre(false)
-
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const ModifyBloc=()=>{
+        setBloc("")
+        document.getElementById("blocinput").value=""
+        setItems([])
+        setEachItem({idControler:id.id,dateValidation:date,designation:"",Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0,blocName:bloc})
+        setModify(true)
+        setBlocentre(false)
+    }
 //////////////////////////////////////////////////////////// button entre bloc////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const AddBloc=(e)=>{
-    if(document.getElementById("blocinput").value === ""){
-        e.preventDefault();
-        document.getElementById("blocinput").focus()
-    }else{
-        setBlocentre(true)
+    const AddBloc=(e)=>{
+        if(document.getElementById("blocinput").value === ""){
+            e.preventDefault();
+            document.getElementById("blocinput").focus()
+        }else{
+            setBlocentre(true)
+        }
     }
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// useEffect(() => {
-//      // 👇️ only runs once
-//      const arraydes=designation?.map((ele)=>({blocName:bloc,idControler:id.id,dateValidation:date,designation:ele.designationName,Quantity_Completed:0,The_remaining_quantity:0,Number_of_Persons:0}))
-
-//      console.log("hello",arraydes);
-//      setItems(items => [...items,arraydes] );
-    
-//   }, [])
 
     return (
         <>
@@ -239,20 +223,20 @@ const AddBloc=(e)=>{
                             type="text"
                             onChange={(e) => setBloc(e.target.value)}
                             placeholder="Enter the Bloc"
-                            style={blocentre==true?{"pointerEvents":"none"}:null}
+                            style={localStorage.getItem("currentDate") === date ? {"pointerEvents":"none"} : null}
                             id="blocinput"
                         />
                        <button style={blocentre==false?{"pointerEvents":"none"}:null} className='absolute left-36 sm:left-60'>
-                        <img src={modify} className="w-5  " alt="" onClick={ModifyBloc} />
+                            <img src={modify} className="w-5 " alt="" onClick={ModifyBloc} />
                         </button>
-                       <button onClick={(e)=>AddBloc(e)}  style={blocentre==true?{"pointerEvents":"none"}:null} 
+                       <button onClick={(e)=>AddBloc(e)}  style={blocentre === true || localStorage.getItem("currentDate") === date?{"pointerEvents":"none"}:null} 
                         className=' text-white text-center justify-items-center flex bg-[#04AA6D] py-1 px-2 rounded-md font-medium   '>
-                        <span >Add bloc</span>
+                            <span >Add bloc</span>
                        </button>
                     </div>
 
                     <div className='flex gap-2 items-center'>
-                        <Button id="valid"  style={blocentre==false?{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600, "pointerEvents":"none"}:{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
+                        <Button id="valid"  style={blocentre===false || localStorage.getItem("currentDate") === date ?{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600, "pointerEvents":"none"}:{"backgroundColor":"#55d9aa", "color":"#000" ,"textTransform":"capitalize","fontWeight":600}} onClick={validation}>
                             Validation
                             <CheckCircleOutlineRoundedIcon style={{"fontSize":"30px" , "marginLeft":"5px"}}/>
                         </Button>
@@ -263,35 +247,41 @@ const AddBloc=(e)=>{
                 </div>
                 <div className='pt-2'>
                     {
-                        blocentre ==false
+                        localStorage.getItem("currentDate") === date 
                         ?
-                        <div className='flex items-center justify-center md:h-96 h-52 bg-[#3C3D42] rounded-md'>
-                            <span className='md:text-2xl font-bold text-[#202224] text-sm'>Please enter bloc name first</span>
-                        </div>
+                            <div className='flex items-center justify-center md:h-96 h-52 bg-[#3C3D42] rounded-md'>
+                                <span className='md:text-2xl font-bold text-[#202224] text-sm'>You have validate the data for today, see you tomorrow</span>
+                            </div>
                         :
-                        <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
-                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                    <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
-                                    <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
-                                    <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
-                                    <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody className="bg-[#1F2025]">
-                                    {afficherDonner?.map((row , index) => (
-                                    <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                        <TableCell component="th" scope="row" style={{"color":"#fff","paddingLeft":"30px"}}>{row.name}</TableCell>
-                                        <TableCell align="center">{row.Quantity_Completed}</TableCell>
-                                        <TableCell align="center">{row.The_remaining_quantity}</TableCell>
-                                        <TableCell align="center">{row.Number_of_Persons}</TableCell>
-                                        
-                                    </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                            blocentre === false
+                            ?
+                                <div className='flex items-center justify-center md:h-96 h-52 bg-[#3C3D42] rounded-md'>
+                                    <span className='md:text-2xl font-bold text-[#202224] text-sm'>Please enter bloc name first</span>
+                                </div>
+                            :
+                                <TableContainer component={Paper} style={{"borderRadius":"10px", "backgroundColor":"#3C3D42"}}>
+                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                        <TableHead>
+                                            <TableRow>
+                                            <TableCell style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 , "paddingLeft":"30px"}}>Designation</TableCell>
+                                            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>Quantity_Completed</TableCell>
+                                            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600}}>The_remaining_quantity</TableCell>
+                                            <TableCell align="center" style={{"color":"#fff" , "fontSize":"20px" , "fontWeight":600 ,  "paddingRight":"30px"}}>Number_of_Persons</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody className="bg-[#1F2025]">
+                                            {afficherDonner?.map((row , index) => (
+                                            <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                <TableCell component="th" scope="row" style={{"color":"#fff","paddingLeft":"30px"}}>{row.name}</TableCell>
+                                                <TableCell align="center">{row.Quantity_Completed}</TableCell>
+                                                <TableCell align="center">{row.The_remaining_quantity}</TableCell>
+                                                <TableCell align="center">{row.Number_of_Persons}</TableCell>
+                                                
+                                            </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
                     }
                 </div>
             </div>

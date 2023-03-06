@@ -209,9 +209,13 @@ const ModifyBloc=()=>{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////// button entre bloc////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Blocentre=()=>{
-    setBlocentre(true)
-
+const AddBloc=(e)=>{
+    if(document.getElementById("blocinput").value === ""){
+        e.preventDefault();
+        document.getElementById("blocinput").focus()
+    }else{
+        setBlocentre(true)
+    }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -241,7 +245,7 @@ const Blocentre=()=>{
                        <button style={blocentre==false?{"pointerEvents":"none"}:null} className='absolute left-36 sm:left-60'>
                         <img src={modify} className="w-5  " alt="" onClick={ModifyBloc} />
                         </button>
-                       <button onClick={Blocentre}  style={blocentre==true?{"pointerEvents":"none"}:null} 
+                       <button onClick={(e)=>AddBloc(e)}  style={blocentre==true?{"pointerEvents":"none"}:null} 
                         className=' text-white text-center justify-items-center flex bg-[#04AA6D] py-1 px-2 rounded-md font-medium   '>
                         <span >Add bloc</span>
                        </button>

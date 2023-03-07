@@ -34,7 +34,7 @@ export default function DetailsController() {
                 Salaheddine elsfatimi
               </span>
             </button>
-            <div className={`absolute right-14  mt-4  bg-[#4C4D53] py-6 rounded-lg z-40  ${ show == false ? "hidden" : "block"}`}>
+            <div className={`absolute right-4  mt-4  bg-[#4C4D53] py-6 rounded-lg z-40  ${ show == false ? "hidden" : "block"}`}>
               <div className="space-y-1 px-3">
                 <div className="flex gap-2 items-center">
                     <PhoneIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>

@@ -107,12 +107,16 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable() {
+export default function AdminTable(searchname ) {
   const [workers , setWorkers]= React.useState([])
+  const [workersserach , setWorkersserach]= React.useState([])
+  const [test , setTest]= React.useState(false)
+  
+
 
 
   /*-------------------------get data of all workers-------------------------*/
-
+ 
   React.useEffect(()=>{
     axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
       setWorkers(res.data)
@@ -122,6 +126,20 @@ export default function AdminTable() {
   },[])
 
   /*-----------------------------------end------------------------------------*/
+  if(searchname.searchname!=="" ){
+
+    const search = workers.filter((ele) => ele.fullName.toLowerCase().indexOf(searchname.searchname.toLowerCase()) !== -1);
+    console.log(search);
+    
+   
+    setWorkersserach(search)
+   
+
+    
+    
+
+ 
+}
 
   /*----------------------------show data workers in table-------------------- */
 

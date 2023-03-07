@@ -3,8 +3,9 @@ import AdminTable from "./AdminTable";
 import Nav from "./NavAdmin";
 
 export default function Controllerpage() {
-  const [searchnmame, setSearchname] = useState("");
+  const [searchname, setSearchname] = useState("");
   const [searchdate, setSearchdate] = useState("");
+  
 
   return (
     <div className=" ">
@@ -19,6 +20,7 @@ export default function Controllerpage() {
                 onChange={(e) => setSearchname(e.target.value)}
                 placeholder="Search for ... "
               />
+              
             </div>
             <div className="flex gap-4 items-center">
               <select name="" id="" onChange={(e) => setSearchdate(e.target.value)} defaultValue="all_data"
@@ -31,7 +33,7 @@ export default function Controllerpage() {
           </div>
         </section>
         <div className=" ">
-          <AdminTable />
+          <AdminTable searchname={searchname}  />
         </div>
       </div>
     </div>

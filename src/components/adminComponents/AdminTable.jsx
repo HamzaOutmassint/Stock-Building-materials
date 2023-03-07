@@ -132,7 +132,7 @@ export default function AdminTable(searchname ) {
     console.log(search);
     
    
-    setWorkersserach(search)
+    return search
    
 
     
@@ -140,6 +140,7 @@ export default function AdminTable(searchname ) {
 
  
 }
+setWorkersserach(search)
 
   /*----------------------------show data workers in table-------------------- */
 

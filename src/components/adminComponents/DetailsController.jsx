@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
-import ControlleTable from "./CotrollerTable"
+import ControlleTable from "./DetailsCotrollerTable"
 import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';

@@ -12,17 +12,21 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 
-function createData(name, Id_card, Phone, Specialty, See_detail) { return { name, Id_card, Phone, Specialty, See_detail,};}
+function createData(Designation, quantity, achieve, rendement) {
+  return { Designation, quantity, achieve, rendement,};
+}
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) { return -1;}
-  if (b[orderBy] > a[orderBy]) {return 1;}
+  if (b[orderBy] > a[orderBy]) { return 1;}
   return 0;
 }
 function getComparator(order, orderBy) {
-  return order === "desc" ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
 }
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -35,39 +39,36 @@ function stableSort(array, comparator) {
 }
 const headCells = [
   {
-    id: "name",
+    id: "Designation",
     numeric: false,
     disablePadding: true,
-    label: "Full Name",
+    label: "Designation",
   },
   {
-    id: "Id_card",
+    id: "quantity",
     numeric: true,
     disablePadding: false,
-    label: "Identity Card Number",
+    label: "quantity Completed",
+  },
+  
+  {
+    id: "achieve",
+    numeric: true,
+    disablePadding: false,
+    label: "To achieve",
   },
   {
-    id: "Phone",
+    id: "rendement",
     numeric: true,
     disablePadding: false,
-    label: 'Phone Number',
-  },
-  {
-    id: "Specialty",
-    numeric: true,
-    disablePadding: false,
-    label: "Specialty",
-  },
-  {
-    id: "See_detail",
-    numeric: true,
-    disablePadding: false,
+    label:"yield"
   },
 ];
-
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => { onRequestSort(event, property);};
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
   return (
     <TableHead className="bg-[#3C3D42]">
       <TableRow>
@@ -83,7 +84,7 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Full Name" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
+                headCell.label === "Designation" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
                 : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","fontWeight":600,"color":"#fff"} : {"fontWeight":600,"color":"#fff"}
               }
             >
@@ -107,49 +108,29 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable({searchName} ) {
-  const [workers , setWorkers]= React.useState([])
-  const [searchResult , setSearchResult] = React.useState([])
+export default function AdminTable() {
+  const location = useLocation();
+  const [workerDetails , setWorkerDetails] = React.useState([])
 
-  /*-------------------------get data of all workers-------------------------*/
- 
+  const id = {id:parseInt(location.hash.slice(1))}
   React.useEffect(()=>{
-    if(searchName === ""){
-      axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
-        setWorkers(res.data)
-      }).catch(err=>{
-        console.error(err);
-      })
-    }else if(searchName !== ""){
-      const regex = new RegExp(searchName.toLowerCase(), 'g');
-      const search = workers.filter((ele) => ele.fullName.toLowerCase().match(regex));
-      setSearchResult(search);
-    }
-  },[searchName])
+    axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
+      setWorkerDetails(res.data)
+      console.log(res.data)
+    }).catch(err=>{
+      console.error(err)
+    })
+  },[])
 
-  /*-----------------------------------end------------------------------------*/
-
-  /*----------------------------show data workers in table-------------------- */
-
-  if(searchName === ""){
-    var rows = workers?.map(ele=>(
-      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
-    ));
-  }else{
-    var rows = searchResult?.map(ele=>(
-      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
-    ));
-  }
+  const rows = workerDetails?.map(ele=>(
+    createData(ele.blocName,ele.qtyCompleted, ele.toachife , ele.rendement)
+  ));
   
-  /*-----------------------------------end------------------------------------*/
-
-
-
   /*---------------------------------------------------------------------- */
     //       all this is for datatable don't change anything here        //
   /*----------------------------------------------------------------------- */
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("Id_card");
+  const [orderBy, setOrderBy] = React.useState("quantity");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
@@ -158,9 +139,7 @@ export default function AdminTable({searchName} ) {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleChangePage = (event, newPage) => { setPage(newPage);};
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -170,7 +149,6 @@ export default function AdminTable({searchName} ) {
   };
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
   /*--------------------------------------------------------------------------- */
     //                                 end                                    //
   /*--------------------------------------------------------------------------- */
@@ -179,17 +157,8 @@ export default function AdminTable({searchName} ) {
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }} style={{"borderRadius":"10px", "backgroundColor":"#1F2025"}} >
         <TableContainer >
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
+          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={dense ? "small" : "medium"}>
+            <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} rowCount={rows.length}/>
             <TableBody >
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -197,28 +166,16 @@ export default function AdminTable({searchName} ) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      // onClick={(event) => handleClick(event, row.name)}
-                      tabIndex={-1}
-                      key={row.name}
-                    >
-                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.name}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.Id_card}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.Phone}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
-                      <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
-                        {row.See_detail}
-                      </TableCell>
+                    <TableRow hover tabIndex={-1} key={row.name}>
+                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.Designation}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.quantity}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.achieve}</TableCell>
+                      <TableCell align="center" style={{ paddingRight: "45px","color":"#fff"}}>{row.rendement}</TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
+                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows,}}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
@@ -226,7 +183,7 @@ export default function AdminTable({searchName} ) {
           </Table>
         </TableContainer>
         <TablePagination
-        style={{"color":"#fff"}}
+          style={{"color":"#fff"}}
           rowsPerPageOptions={[5, 8]}
           component="div"
           count={rows.length}

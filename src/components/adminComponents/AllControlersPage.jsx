@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AdminTable from "./AdminTable";
+import AllControlesTable from "./AllControlesTable";
 import Nav from "./NavAdmin";
 
-export default function Controllerpage() {
+export default function AllControlersPage() {
   const [searchName, setSearchName] = useState("");
   const [searchdate, setSearchdate] = useState("");
   
@@ -33,7 +33,7 @@ export default function Controllerpage() {
           </div>
         </section>
         <div className=" ">
-          <AdminTable searchName={searchName}  />
+          <AllControlesTable searchName={searchName}  />
         </div>
       </div>
     </div>

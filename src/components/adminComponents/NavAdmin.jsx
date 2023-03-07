@@ -22,7 +22,7 @@ export default function Nav() {
           </div>
           <div className="flex flex-col text-white">
             <span className="font-mono font-bold ">Salaheddine elfatimi</span>
-            <span className="font-mono font-thin ">responsible</span>
+            <span className="font-mono font-thin ">Responsible</span>
           </div>
         </div>
         <div className="flex">
@@ -36,22 +36,16 @@ export default function Nav() {
           >
             <NavLink  className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={user} alt="" className="w-6" />
-              <span className="text-center font-mono font-bold text-white text-xl">
-             My Account
-              </span>
+              <span className="text-center font-mono font-bold text-white text-xl">My Account</span>
             </NavLink>
             
-            <NavLink to={"../Add_new_worker"} className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
+            <NavLink to={"../AddNewControler"} className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={adduser} alt="" className="w-6" />
-              <span className="text-center font-mono font-bold text-white text-xl">
-                Add new worker
-              </span>
+              <span className="text-center font-mono font-bold text-white text-xl">Add new controler</span>
             </NavLink>
             <a href="/" onClick={()=>localStorage.removeItem("AdminToken")} className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
               <img src={logout} alt="" className="w-6" />
-              <span className="text-center font-mono font-bold text-white text-xl">
-              Logout
-              </span>
+              <span className="text-center font-mono font-bold text-white text-xl">Logout</span>
             </a>
           </div>
         </div>

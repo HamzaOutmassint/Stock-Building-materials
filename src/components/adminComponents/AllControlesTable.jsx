@@ -13,92 +13,61 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-function createData(Designation, quantity, achieve, rendement) {
-  return {
-    Designation,
-    quantity,
-    achieve,
-    rendement,
-  };
-}
-
-// le donne in table
-const rows = [
-  createData("Bloc 0", "111", "12", "133"),
-  createData("Bloc 1", "334", "134", "111"),
-  createData("Bloc 2", "122", "123", "311"),
-  createData("Bloc 3", "312",  "21", "155"),
-  createData("Bloc 4", "11",  "124", "145"),
-  createData("Bloc 5", "455",  "124", "555"),
-  createData("Bloc 6", "322",  "566", "324"),
-  createData("Bloc 7", "676",  "343", "554"),
-  createData("Bloc 8", "453",  "232", "453"),
-];
-
-
+function createData(name, Id_card, Phone, Specialty, See_detail) { return { name, Id_card, Phone, Specialty, See_detail,};}
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
+  if (b[orderBy] < a[orderBy]) { return -1;}
+  if (b[orderBy] > a[orderBy]) {return 1;}
   return 0;
 }
-
 function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
+  return order === "desc" ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
+    if (order !== 0) { return order;}
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 const headCells = [
   {
-    id: "Designation",
+    id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Designation",
+    label: "Full Name",
   },
   {
-    id: "quantity",
+    id: "Id_card",
     numeric: true,
     disablePadding: false,
-    label: "quantity Completed",
-  },
-  
-  {
-    id: "achieve",
-    numeric: true,
-    disablePadding: false,
-    label: "To achieve",
+    label: "Identity Card Number",
   },
   {
-    id: "rendement",
+    id: "Phone",
     numeric: true,
     disablePadding: false,
-    label:"yield"
+    label: 'Phone Number',
+  },
+  {
+    id: "Specialty",
+    numeric: true,
+    disablePadding: false,
+    label: "Specialty",
+  },
+  {
+    id: "See_detail",
+    numeric: true,
+    disablePadding: false,
   },
 ];
 
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
+  const createSortHandler = (property) => (event) => { onRequestSort(event, property);};
   return (
     <TableHead className="bg-[#3C3D42]">
       <TableRow>
@@ -114,7 +83,7 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
               style={
-                headCell.label === "Designation" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
+                headCell.label === "Full Name" ? {"paddingLeft":"33px","fontWeight":600,"color":"#fff"} 
                 : headCell.label === 'Number_of_Persons' ? {"paddingRight":"33px","fontWeight":600,"color":"#fff"} : {"fontWeight":600,"color":"#fff"}
               }
             >
@@ -131,7 +100,6 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
-
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
@@ -139,35 +107,73 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable() {
+export default function AllControlesTable({searchName} ) {
+  const [workers , setWorkers]= React.useState([])
+  const [searchResult , setSearchResult] = React.useState([])
+
+  /*-------------------------get data of all workers-------------------------*/
+ 
+  React.useEffect(()=>{
+    if(searchName === ""){
+      axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
+        setWorkers(res.data)
+      }).catch(err=>{
+        console.error(err);
+      })
+    }else if(searchName !== ""){
+      const regex = new RegExp(searchName.toLowerCase(), 'g');
+      const search = workers.filter((ele) => ele.fullName.toLowerCase().match(regex));
+      setSearchResult(search);
+    }
+  },[searchName])
+
+  /*-----------------------------------end------------------------------------*/
+
+  /*----------------------------show data workers in table-------------------- */
+
+  if(searchName === ""){
+    var rows = workers?.map(ele=>(
+      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+    ));
+  }else{
+    var rows = searchResult?.map(ele=>(
+      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+    ));
+  }
+  
+  /*-----------------------------------end------------------------------------*/
+
+
+
+  /*---------------------------------------------------------------------- */
+    //       all this is for datatable don't change anything here        //
+  /*----------------------------------------------------------------------- */
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("quantity");
+  const [orderBy, setOrderBy] = React.useState("Id_card");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
-
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  /*--------------------------------------------------------------------------- */
+    //                                 end                                    //
+  /*--------------------------------------------------------------------------- */
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -193,14 +199,17 @@ export default function AdminTable() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      // onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
                       key={row.name}
                     >
-                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.Designation}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.quantity}</TableCell>
-                      <TableCell align="center" style={{"color":"#fff"}}> {row.achieve}</TableCell>
-                      <TableCell align="center" style={{ paddingRight: "45px","color":"#fff"}}>{row.rendement}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.name}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.Id_card}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.Phone}</TableCell>
+                      <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
+                      <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
+                        {row.See_detail}
+                      </TableCell>
                     </TableRow>
                   );
                 })}

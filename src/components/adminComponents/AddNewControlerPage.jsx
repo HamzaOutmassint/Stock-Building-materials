@@ -10,7 +10,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Add_new_Worker() {
+export default function AddNewControler() {
   /*----------this state for show the access message----------*/
   const [open, setOpen] = React.useState(false);
 

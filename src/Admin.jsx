@@ -1,26 +1,21 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Choseprojet from "./components/adminComponents/Choseprojet";
-import Chose_worker_bloc from "./components/adminComponents/Chose_worker_bloc"
-import Controller from "./components/adminComponents/Controllerpage"
-import Add_new_worker from "./components/adminComponents/Add_new_worker"
+import ChoseProjet from "./components/adminComponents/ChoseProjet";
+import OptionsPage from "./components/adminComponents/OptionsPage"
+import AddNewControler from "./components/adminComponents/AddNewControlerPage"
 import DetailsController from "./components/adminComponents/DetailsController"
 import Blocpage from "./components/adminComponents/Blocpage"
-// import Login from "./components/adminComponents/Login";
+import AllControlersPage from "./components/adminComponents/AllControlersPage";
 export default () => {
   return (
     <div>
-      <div className="">
+      <div>
         <Routes>
-
-        {/* <Route path="*" element={<Login />} /> */}
-        <Route path="*" element={<Choseprojet />} />
-        <Route path="/Chose_worker_bloc" element={<Chose_worker_bloc />} />
-        <Route path="/Controllerpage" element={<Controller />} />
-        <Route path="/Add_new_worker" element={<Add_new_worker />} />
-        <Route path="/DetailsController" element={<DetailsController />} />
-        <Route path="/Blocpage" element={<Blocpage />} />
-
+          <Route path="*" element={<ChoseProjet />} />
+          <Route path="/OptionsPage" element={<OptionsPage />} />
+          <Route path="/AllControlers" element={<AllControlersPage />} />
+          <Route path="/AddNewControler" element={<AddNewControler />} />
+          <Route path="/DetailsController" element={<DetailsController />} />
+          <Route path="/Blocpage" element={<Blocpage />} />
         </Routes>
       </div>
     </div>

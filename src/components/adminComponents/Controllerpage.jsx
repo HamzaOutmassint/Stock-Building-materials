@@ -3,7 +3,7 @@ import AdminTable from "./AdminTable";
 import Nav from "./NavAdmin";
 
 export default function Controllerpage() {
-  const [searchname, setSearchname] = useState("");
+  const [searchName, setSearchName] = useState("");
   const [searchdate, setSearchdate] = useState("");
   
 
@@ -17,7 +17,7 @@ export default function Controllerpage() {
               <input
                 className="bg-[#3C3D42] pl-1 h-9 rounded-xl sm:w-64 focus:outline none p-1 text-white text-xs"
                 type="text"
-                onChange={(e) => setSearchname(e.target.value)}
+                onChange={(e) => setSearchName(e.target.value)}
                 placeholder="Search for ... "
               />
               
@@ -33,7 +33,7 @@ export default function Controllerpage() {
           </div>
         </section>
         <div className=" ">
-          <AdminTable searchname={searchname}  />
+          <AdminTable searchName={searchName}  />
         </div>
       </div>
     </div>

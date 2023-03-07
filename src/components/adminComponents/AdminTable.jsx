@@ -107,47 +107,40 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable(searchname ) {
+export default function AdminTable({searchName} ) {
   const [workers , setWorkers]= React.useState([])
-  const [workersserach , setWorkersserach]= React.useState([])
-  const [test , setTest]= React.useState(false)
-  
-
-
+  const [searchResult , setSearchResult] = React.useState([])
 
   /*-------------------------get data of all workers-------------------------*/
  
   React.useEffect(()=>{
-    axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
-      setWorkers(res.data)
-    }).catch(err=>{
-      console.error(err);
-    })
-  },[])
+    if(searchName === ""){
+      axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
+        setWorkers(res.data)
+      }).catch(err=>{
+        console.error(err);
+      })
+    }else if(searchName !== ""){
+      const regex = new RegExp(searchName.toLowerCase(), 'g');
+      const search = workers.filter((ele) => ele.fullName.toLowerCase().match(regex));
+      setSearchResult(search);
+    }
+  },[searchName])
 
   /*-----------------------------------end------------------------------------*/
-  if(searchname.searchname!=="" ){
-
-    const search = workers.filter((ele) => ele.fullName.toLowerCase().indexOf(searchname.searchname.toLowerCase()) !== -1);
-    console.log(search);
-    
-   
-    return search
-   
-
-    
-    
-
- 
-}
-setWorkersserach(search)
 
   /*----------------------------show data workers in table-------------------- */
 
-  const rows = workers?.map(ele=>(
-    createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
-  ));
-
+  if(searchName === ""){
+    var rows = workers?.map(ele=>(
+      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+    ));
+  }else{
+    var rows = searchResult?.map(ele=>(
+      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+    ));
+  }
+  
   /*-----------------------------------end------------------------------------*/
 
 

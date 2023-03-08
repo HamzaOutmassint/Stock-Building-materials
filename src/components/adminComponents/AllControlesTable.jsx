@@ -117,6 +117,7 @@ export default function AllControlesTable({searchName} ) {
     if(searchName === ""){
       axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
         setWorkers(res.data)
+        setSearchResult(res.data)
       }).catch(err=>{
         console.error(err);
       })
@@ -131,15 +132,11 @@ export default function AllControlesTable({searchName} ) {
 
   /*----------------------------show data workers in table-------------------- */
 
-  if(searchName === ""){
-    var rows = workers?.map(ele=>(
-      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
-    ));
-  }else{
+  
     var rows = searchResult?.map(ele=>(
       createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
-  }
+  
   
   /*-----------------------------------end------------------------------------*/
 

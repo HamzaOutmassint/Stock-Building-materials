@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { NavLink } from "react-router-dom";
+import { NavLink ,Link } from "react-router-dom";
 import axios from "axios";
 
 function createData(Bloc, Controller, Specialty, See_detail) {
@@ -129,21 +129,41 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable() {
+export default function AdminTable(searchnmame) {
+  const serachName = searchnmame.searchnmame
+  
   const [blocWorker,setBlocWorker]=React.useState([])
+  const [searchResult , setSearchResult] = React.useState([])
+
+  /*-------------------------get data of all workers-------------------------*/
   React.useEffect(()=>{
+    if (serachName===""){
     axios.post("http://localhost/project_atlass/getBlocInfo.php").then(res=>{
       setBlocWorker(res.data)
+      setSearchResult(res.data)
       
     }).catch(err=>{
       console.error(err)
     })
-  },[])
- 
+  }else if(serachName!==""){
+    const regex = new RegExp(serachName.toLowerCase(), 'g');
+    const search = blocWorker.filter((ele) => ele.fullName.toLowerCase().match(regex));
+    setSearchResult(search);
 
-  const rows = blocWorker?.map(ele=>(
-    createData(ele.blocName,ele.fullName, ele.speciality ,<NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
-  ));
+  }
+  },[serachName])
+   /*-----------------------------------end------------------------------------*/
+
+
+  /*----------------------------show data workers in table-------------------- */
+
+    const rows = searchResult?.map(ele=>(
+      createData(ele.blocName,ele.fullName, ele.speciality , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+    ));
+  
+  
+  /*-----------------------------------end------------------------------------*/
+  
   
 
 
@@ -177,9 +197,7 @@ export default function AdminTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
+ 
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -210,7 +228,7 @@ export default function AdminTable() {
                     <TableRow
                     
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                     
                       tabIndex={-1}
                       key={index}
                     >

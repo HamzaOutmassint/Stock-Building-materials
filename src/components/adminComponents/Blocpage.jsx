@@ -34,7 +34,7 @@ export default function Blocpage() {
               </div>
             </div>
           </section>
-          <Bloctable/>
+          <Bloctable searchnmame={searchnmame}/>
         </div>
       </div>
     </div>

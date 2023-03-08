@@ -17,7 +17,7 @@ export default function DetailsController() {
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then(res=>{
       setWorkerDetails(res.data.controlerinfo)
-      console.log(res.data)
+     
     }).catch(err=>{
       console.error(err)
     })

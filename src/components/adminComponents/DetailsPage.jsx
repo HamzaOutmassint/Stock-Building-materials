@@ -15,14 +15,16 @@ export default function DetailsPage() {
  
   const id = {id:parseInt(location.hash.slice(1))}
   const blocName = new URLSearchParams(location.search).get('bloc')
-  
+
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then(res=>{
       setWorkerDetails(res.data.controlerinfo)
+      console.log(res.data.controlerinfo)
     }).catch(err=>{
       console.error(err)
     })
-  },[id])
+  },[])
+
 
   return (
     <div>
@@ -34,12 +36,9 @@ export default function DetailsPage() {
               <select defaultValue="all_bloc" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
                 <option value='all_bloc'>All Bloc</option>
                 {
-                  workerDetails !== [] 
-                  ?
-                  workerDetails.map((ele,index)=>(
+                  workerDetails?.map((ele,index)=>(
                     <option value={ele.blocName} key={index}>{ele.blocName}</option>
                   ))
-                  : null
                 }
               </select>
             </div>
@@ -47,12 +46,9 @@ export default function DetailsPage() {
               <select defaultValue="all_date" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
                 <option value="all_date">All date</option>
                 {
-                  workerDetails !== [] 
-                  ?
-                  workerDetails.map((ele,index)=>(
+                  workerDetails?.map((ele,index)=>(
                     <option value={ele.dateValidation} key={index}>{ele.dateValidation}</option>
                   ))
-                  : null
                 }
               </select>
             </div>

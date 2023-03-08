@@ -195,7 +195,7 @@ export default function AdminTable(searchnmame) {
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Controller}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
                       <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
-                        <NavLink to={"../DetailsController"} className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
+                       {row.See_detail}
                       </TableCell>
                     </TableRow>
                   );

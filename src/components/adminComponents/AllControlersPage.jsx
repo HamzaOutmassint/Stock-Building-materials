@@ -23,7 +23,7 @@ export default function AllControlersPage() {
               
             </div>
             <div className="flex gap-4 items-center">
-              <select name="" id="" onChange={(e) => setSearchdate(e.target.value)} defaultValue="all_data"
+              <select  name="" id="" onChange={(e) => setSearchdate(e.target.value)} defaultValue="all_data"
                 className="bg-[#3C3D42] p-3 h-9 sm:w-64 md:w-40 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"
               >
                 <option value="all_data">All date</option>

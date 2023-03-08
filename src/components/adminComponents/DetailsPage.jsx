@@ -12,7 +12,7 @@ export default function DetailsPage() {
   const [show, setShow] = useState(false);
   const [workerDetails , setWorkerDetails] = React.useState([])
   const location = useLocation();
-
+ 
   const id = {id:parseInt(location.hash.slice(1))}
   const blocName = new URLSearchParams(location.search).get('bloc')
   

@@ -130,7 +130,7 @@ export default function AdminTable(searchnmame) {
   /*----------------------------show data workers in table-------------------- */
 
     const rows = searchResult?.map(ele=>(
-      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsController/?bloc=${ele.blocName}#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsController#${ele.idControler}#${ele.blocName}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
   
   
@@ -196,7 +196,7 @@ export default function AdminTable(searchnmame) {
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Controller}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Specialty}</TableCell>
                       <TableCell align="right" style={{ paddingRight: "45px","color":"#fff"}}>
-                        <NavLink to={"../DetailsController"} className="hover:underline decoration-solid hover:text-[#3471ff]">{row.See_detail}</NavLink>
+                       {row.See_detail}
                       </TableCell>
                     </TableRow>
                   );

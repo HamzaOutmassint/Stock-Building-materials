@@ -134,6 +134,7 @@ export default function AdminTable(searchnmame) {
   
   const [blocWorker,setBlocWorker]=React.useState([])
   const [searchResult , setSearchResult] = React.useState([])
+ 
 
   /*-------------------------get data of all workers-------------------------*/
   React.useEffect(()=>{
@@ -158,9 +159,9 @@ export default function AdminTable(searchnmame) {
   /*----------------------------show data workers in table-------------------- */
 
     const rows = searchResult?.map(ele=>(
-      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsController#${ele.idControler}#${ele.blocName}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink  to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
-  
+ 
   
   /*-----------------------------------end------------------------------------*/
   

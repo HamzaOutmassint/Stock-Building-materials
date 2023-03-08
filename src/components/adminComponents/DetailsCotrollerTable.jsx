@@ -113,6 +113,7 @@ export default function AdminTable() {
   const [workerDetails , setWorkerDetails] = React.useState([])
 
   const id = {id:parseInt(location.hash.slice(1))}
+  
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
       setWorkerDetails(res.data)

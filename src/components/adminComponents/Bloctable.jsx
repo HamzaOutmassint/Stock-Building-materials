@@ -15,46 +15,26 @@ import { visuallyHidden } from "@mui/utils";
 import { NavLink ,Link } from "react-router-dom";
 import axios from "axios";
 
-function createData(Bloc, Controller, Specialty, See_detail) {
- 
-  return {
-    Bloc,
-    Controller,
-    Specialty,
-    See_detail,
-  };
-}
-
-
-
+function createData(Bloc, Controller, Specialty, See_detail) {return { Bloc, Controller, Specialty, See_detail,};}
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
+  if (b[orderBy] < a[orderBy]) { return -1;}
+  if (b[orderBy] > a[orderBy]) { return 1;}
   return 0;
 }
-
 function getComparator(order, orderBy) {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
+    if (order !== 0) { return order;}
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 const headCells = [
   {
     id: "Bloc",
@@ -81,14 +61,9 @@ const headCells = [
     disablePadding: false,
   },
 ];
-
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-  
-
+  const createSortHandler = (property) => (event) => { onRequestSort(event, property);};
   return (
     <TableHead className="bg-[#3C3D42]">
       <TableRow>
@@ -121,7 +96,6 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
-
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
@@ -129,9 +103,9 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+
 export default function AdminTable(searchnmame) {
   const serachName = searchnmame.searchnmame
-  
   const [blocWorker,setBlocWorker]=React.useState([])
   const [searchResult , setSearchResult] = React.useState([])
  
@@ -142,7 +116,6 @@ export default function AdminTable(searchnmame) {
     axios.post("http://localhost/project_atlass/getBlocInfo.php").then(res=>{
       setBlocWorker(res.data)
       setSearchResult(res.data)
-      
     }).catch(err=>{
       console.error(err)
     })
@@ -150,30 +123,20 @@ export default function AdminTable(searchnmame) {
     const regex = new RegExp(serachName.toLowerCase(), 'g');
     const search = blocWorker.filter((ele) => ele.fullName.toLowerCase().match(regex));
     setSearchResult(search);
-
   }
   },[serachName])
    /*-----------------------------------end------------------------------------*/
 
-
   /*----------------------------show data workers in table-------------------- */
 
     const rows = searchResult?.map(ele=>(
-      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink  to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsController#${ele.idControler}#${ele.blocName}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
- 
+  
   
   /*-----------------------------------end------------------------------------*/
   
   
-
-
-
-
-
-
-
-
 
 
 
@@ -197,10 +160,6 @@ export default function AdminTable(searchnmame) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
- 
-
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 

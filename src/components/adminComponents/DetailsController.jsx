@@ -10,14 +10,13 @@ import axios from "axios";
 
 export default function DetailsController() {
   const [show, setShow] = useState(false);
-  const location = useLocation();
   const [workerDetails , setWorkerDetails] = React.useState([])
+  const location = useLocation();
 
   const id = {id:parseInt(location.hash.slice(1))}
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then(res=>{
       setWorkerDetails(res.data.controlerinfo)
-     
     }).catch(err=>{
       console.error(err)
     })

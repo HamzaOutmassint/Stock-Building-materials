@@ -158,7 +158,7 @@ export default function AdminTable(searchnmame) {
   /*----------------------------show data workers in table-------------------- */
 
     const rows = searchResult?.map(ele=>(
-      createData(ele.blocName,ele.fullName, ele.speciality , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
   
   

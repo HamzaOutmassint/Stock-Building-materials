@@ -48,20 +48,20 @@ const headCells = [
     id: "quantity",
     numeric: true,
     disablePadding: false,
-    label: "quantity Completed",
+    label: "Completed quantity",
   },
   
   {
     id: "achieve",
     numeric: true,
     disablePadding: false,
-    label: "To achieve",
+    label: "Incomplete quantity",
   },
   {
     id: "rendement",
     numeric: true,
     disablePadding: false,
-    label:"yield"
+    label:"Rendement"
   },
 ];
 function EnhancedTableHead(props) {

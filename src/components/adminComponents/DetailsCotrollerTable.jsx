@@ -126,9 +126,9 @@ export default function AdminTable() {
       axios.post("http://localhost/project_atlass/detailsBloc.php",parameterSend).then(res=>{
       console.log(res.data)
       setWorkerDetails(res.data)
-    }).catch(err=>{
-      console.error(err)
-    })
+      }).catch(err=>{
+        console.error(err)
+      })
     }
     
   },[])

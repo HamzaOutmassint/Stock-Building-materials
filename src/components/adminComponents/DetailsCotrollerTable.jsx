@@ -116,7 +116,7 @@ export default function AdminTable() {
   const blocName = new URLSearchParams(location.search).get('bloc')
   const parameterSend = {id:id , blocName:blocName}
   React.useEffect(()=>{
-    if(blocName === ""){
+    if(blocName === null){
       axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
         setWorkerDetails(res.data)
       }).catch(err=>{

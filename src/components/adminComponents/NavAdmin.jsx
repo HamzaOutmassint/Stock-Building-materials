@@ -34,7 +34,7 @@ export default function Nav() {
               show == false ? "hidden" : "block"
             }`}
           >
-            <NavLink  className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
+            <NavLink to="../MyAccount" className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={user} alt="" className="w-6" />
               <span className="text-center font-mono font-bold text-white text-xl">My Account</span>
             </NavLink>

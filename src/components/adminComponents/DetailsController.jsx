@@ -4,11 +4,25 @@ import ControlleTable from "./DetailsCotrollerTable"
 import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
+import {  useLocation } from "react-router-dom";
 import PhoneIcon from '@mui/icons-material/Phone';
+import axios from "axios";
 
 export default function DetailsController() {
   const [show, setShow] = useState(false);
+  const location = useLocation();
+  const [workerDetails , setWorkerDetails] = React.useState([])
 
+  const id = {id:parseInt(location.hash.slice(1))}
+  React.useEffect(()=>{
+    axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then(res=>{
+      setWorkerDetails(res.data.controlerinfo)
+      console.log(res.data)
+    }).catch(err=>{
+      console.error(err)
+    })
+  },[])
+ 
   return (
     <div>
       <Nav />
@@ -31,7 +45,7 @@ export default function DetailsController() {
           <div>
           <button onClick={() => setShow(!show)} className="flex gap-1 items-center ">
               <span className="text-center font-mono font-extrabold text-white uppercase hover:text-[#b1b5ca]">
-                Salaheddine elsfatimi
+                {workerDetails[0]?.fullName}
               </span>
             </button>
             <div className={`absolute right-4  mt-4  bg-[#4C4D53] py-6 rounded-lg z-40  ${ show == false ? "hidden" : "block"}`}>
@@ -39,25 +53,25 @@ export default function DetailsController() {
                 <div className="flex gap-2 items-center">
                     <PhoneIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>
                     <span className="font-mono  text-white">
-                      <span className="font-semibold">Phone:</span> 0650402456
+                      <span className="font-semibold">Phone:</span>  {workerDetails[0]?.phoneNum}
                     </span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <MailOutlineRoundedIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>
                   <span className="font-mono  text-white">
-                  <span className="font-semibold">Email:</span> hamzasalah@gmail.com
+                  <span className="font-semibold">Email:</span>  {workerDetails[0]?.email}
                   </span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <LocationOnOutlinedIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>
                   <span className="font-mono  text-white">
-                  <span className="font-semibold">Address:</span> mhamid9 marrakech
+                  <span className="font-semibold">Address:</span>  {workerDetails[0]?.Address}
                   </span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <EngineeringOutlinedIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>
                   <span className="font-mono  text-white">
-                  <span className="font-semibold">specialty:</span> Electricity
+                  <span className="font-semibold">specialty:</span>  {workerDetails[0]?.speciality}
                   </span>
                 </div>
               </div>

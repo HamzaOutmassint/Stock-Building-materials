@@ -116,14 +116,14 @@ export default function AdminTable() {
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
       setWorkerDetails(res.data)
-      console.log(res.data)
+   
     }).catch(err=>{
       console.error(err)
     })
   },[])
 
   const rows = workerDetails?.map(ele=>(
-    createData(ele.blocName,ele.qtyCompleted, ele.toachife , ele.rendement)
+    createData(ele.designation,ele.qtyCompleted, ele.toachife , ele.rendement)
   ));
   
   /*---------------------------------------------------------------------- */
@@ -166,7 +166,7 @@ export default function AdminTable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
+                    <TableRow hover tabIndex={-1} key={index}>
                       <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.Designation}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.quantity}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.achieve}</TableCell>

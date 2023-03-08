@@ -13,8 +13,10 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 function createData(Bloc, Controller, Specialty, See_detail) {
+ 
   return {
     Bloc,
     Controller,
@@ -23,17 +25,7 @@ function createData(Bloc, Controller, Specialty, See_detail) {
   };
 }
 
-const rows = [
-  createData("Bloc 0", "hamza outmassint", "Electricity", "see more details"),
-  createData("Bloc 1", "salah elfatimi", "Plumbing", "see more details"),
-  createData("Bloc 2", "walid katir", "Ventilation", "see more details"),
-  createData("Bloc 3", "hicham radi",  "Air conditioner", "see more details"),
-  createData("Bloc 4", "youssef radi",  "Plumbing", "see more details"),
-  createData("Bloc 5", "khalid bouskso",  "Air conditioner", "see more details"),
-  createData("Bloc 6", "norddin amezwar",  "Ventilation", "see more details"),
-  createData("Bloc 7", "samir mglawi",  "Plumbing", "see more details"),
-  createData("Bloc 8", "imran sdjhds",  "Electricity", "see more details"),
-];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -95,6 +87,7 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+  
 
   return (
     <TableHead className="bg-[#3C3D42]">
@@ -137,6 +130,32 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function AdminTable() {
+  const [blocWorker,setBlocWorker]=React.useState([])
+  React.useEffect(()=>{
+    axios.post("http://localhost/project_atlass/getBlocInfo.php").then(res=>{
+      setBlocWorker(res.data)
+      
+    }).catch(err=>{
+      console.error(err)
+    })
+  },[])
+ 
+
+  const rows = blocWorker?.map(ele=>(
+    createData(ele.blocName,ele.fullName, ele.speciality ,<NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+  ));
+  
+
+
+
+
+
+
+
+
+
+
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("Controller");
   const [page, setPage] = React.useState(0);
@@ -193,7 +212,7 @@ export default function AdminTable() {
                       hover
                       onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
-                      key={row.name}
+                      key={index}
                     >
                       <TableCell component="th" id={labelId} scope="row" style={{ paddingLeft: "33px","color":"#fff"}}>{row.Bloc}</TableCell>
                       <TableCell align="center" style={{"color":"#fff"}}> {row.Controller}</TableCell>

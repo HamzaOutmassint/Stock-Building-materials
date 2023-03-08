@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
-import Bloctable from "./Bloctable"
-export default function Blocpage() {
+import BlocTable from "./BlocTable"
+
+export default function BlocPage() {
   const [searchnmame, setSearchname] = useState("");
   const [searchbloc, setSearchbloc] = useState("");
-  console.log(searchbloc);
-  console.log(searchnmame);
   return (
     <div>
       <Nav />
@@ -18,23 +17,22 @@ export default function Blocpage() {
                   className="bg-[#3C3D42] pl-2 h-9 rounded-xl sm:w-64  focus:outline none p-1 text-white text-xs"
                   type="text"
                   onChange={(e) => setSearchname(e.target.value)}
-                  placeholder="Search for ... "
+                  placeholder="Search for bloc ... "
                 />
               </div>
-              <div className="flex gap-4 items-center">
+              {/* <div className="flex gap-4 items-center">
                 <select
-                  name=""
-                  id=""
+                  defaultValue="all_bloc"
                   onChange={(e) => setSearchbloc(e.target.value)}
                   className="bg-[#3C3D42] p-3  h-9 sm:w-44 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"
                 >
-                  <option selected>All Bloc</option>
+                  <option value="all_bloc">All Bloc</option>
                   <option value="1">1</option>
                 </select>
-              </div>
+              </div> */}
             </div>
           </section>
-          <Bloctable searchnmame={searchnmame}/>
+          <BlocTable searchnmame={searchnmame}/>
         </div>
       </div>
     </div>

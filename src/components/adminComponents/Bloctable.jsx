@@ -121,7 +121,7 @@ export default function AdminTable(searchnmame) {
     })
   }else if(serachName!==""){
     const regex = new RegExp(serachName.toLowerCase(), 'g');
-    const search = blocWorker.filter((ele) => ele.fullName.toLowerCase().match(regex));
+    const search = blocWorker.filter((ele) => ele.blocName.toLowerCase().match(regex));
     setSearchResult(search);
   }
   },[serachName])
@@ -130,9 +130,8 @@ export default function AdminTable(searchnmame) {
   /*----------------------------show data workers in table-------------------- */
 
     const rows = searchResult?.map(ele=>(
-      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsController/?bloc=${ele.blocName}#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+      createData(ele.blocName,ele.fullName, ele.speciality , <NavLink to={`../DetailsPage/?bloc=${ele.blocName}#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
-  
   
   /*-----------------------------------end------------------------------------*/
   

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Nav from "./NavAdmin";
-import ControlleTable from "./DetailsCotrollerTable"
+import DetailsPageTable from "./DetailsPageTable"
 import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
@@ -8,20 +8,22 @@ import {  useLocation } from "react-router-dom";
 import PhoneIcon from '@mui/icons-material/Phone';
 import axios from "axios";
 
-export default function DetailsController() {
+export default function DetailsPage() {
   const [show, setShow] = useState(false);
   const [workerDetails , setWorkerDetails] = React.useState([])
   const location = useLocation();
 
   const id = {id:parseInt(location.hash.slice(1))}
+  const blocName = new URLSearchParams(location.search).get('bloc')
+  
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then(res=>{
       setWorkerDetails(res.data.controlerinfo)
     }).catch(err=>{
       console.error(err)
     })
-  },[])
- 
+  },[id])
+
   return (
     <div>
       <Nav />
@@ -31,13 +33,27 @@ export default function DetailsController() {
             <div>
               <select defaultValue="all_bloc" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
                 <option value='all_bloc'>All Bloc</option>
-                <option value="1">1</option>
+                {
+                  workerDetails !== [] 
+                  ?
+                  workerDetails.map((ele,index)=>(
+                    <option value={ele.blocName} key={index}>{ele.blocName}</option>
+                  ))
+                  : null
+                }
               </select>
             </div>
             <div className="flex gap-4 items-center">
               <select defaultValue="all_date" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
                 <option value="all_date">All date</option>
-                <option value="1">1</option>
+                {
+                  workerDetails !== [] 
+                  ?
+                  workerDetails.map((ele,index)=>(
+                    <option value={ele.dateValidation} key={index}>{ele.dateValidation}</option>
+                  ))
+                  : null
+                }
               </select>
             </div>
           </div>
@@ -77,7 +93,7 @@ export default function DetailsController() {
             </div>
           </div>
         </section>
-        <ControlleTable/>
+        <DetailsPageTable/>
       </div>
     </div>
   );

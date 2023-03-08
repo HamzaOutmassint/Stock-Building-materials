@@ -134,7 +134,7 @@ export default function AllControlesTable({searchName} ) {
 
   
     var rows = searchResult?.map(ele=>(
-      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsController#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
+      createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsPage#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
   
   

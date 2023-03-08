@@ -9,7 +9,10 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import axios from "axios";
 
 export default function DetailsPage() {
+ 
   const [show, setShow] = useState(false);
+  const [searchdate, setSearchdate] = useState("");
+  const [searchbloc, setSearchbloc] = useState("");
   const [workerDetails , setWorkerDetails] = React.useState([])
   const location = useLocation();
  
@@ -19,7 +22,7 @@ export default function DetailsPage() {
   React.useEffect(()=>{
     axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then(res=>{
       setWorkerDetails(res.data.controlerinfo)
-      console.log(res.data.controlerinfo)
+     
     }).catch(err=>{
       console.error(err)
     })
@@ -32,8 +35,8 @@ export default function DetailsPage() {
       <div className="p-2">
         <section className="pb-2 flex flex-col md:items-center space-y-4 md:space-y-0 md:flex-row md:justify-between gap-2">
           <div className="flex items-center gap-6">
-            <div>
-              <select defaultValue="all_bloc" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
+            <div className={blocName!==null ? "hidden":""}>
+              <select defaultValue="all_bloc" onChange={(e) => setSearchbloc(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs ">
                 <option value='all_bloc'>All Bloc</option>
                 {
                   workerDetails?.map((ele,index)=>(
@@ -47,8 +50,11 @@ export default function DetailsPage() {
                 <option value="all_date">All date</option>
                 {
                   workerDetails?.map((ele,index)=>(
+                    
                     <option value={ele.dateValidation} key={index}>{ele.dateValidation}</option>
+
                   ))
+
                 }
               </select>
             </div>
@@ -89,7 +95,7 @@ export default function DetailsPage() {
             </div>
           </div>
         </section>
-        <DetailsPageTable/>
+        <DetailsPageTable searchbloc={searchbloc}/>
       </div>
     </div>
   );

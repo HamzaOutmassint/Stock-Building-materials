@@ -108,21 +108,24 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable() {
+export default function AdminTable(searchbloc) {
+ const blocserach=searchbloc.searchbloc
   const location = useLocation();
   const [workerDetails , setWorkerDetails] = React.useState([])
 
   const id = {id:parseInt(location.hash.slice(1))}
-  const blocName = new URLSearchParams(location.search).get('bloc')
+  const blocName = new URLSearchParams(location.search).get('bloc')===null ? blocserach : new URLSearchParams(location.search).get('bloc') ;
+ 
   const parameterSend = {id:id , blocName:blocName}
+ 
   React.useEffect(()=>{
-    if(blocName === null){
+    if(blocName === null || blocserach==="" || blocserach==="all_bloc"){
       axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
         setWorkerDetails(res.data)
       }).catch(err=>{
         console.error(err)
       })
-    }else{
+    }else if(blocserach!=="" && blocserach!=="all_bloc"){
       axios.post("http://localhost/project_atlass/detailsBloc.php",parameterSend).then(res=>{
       setWorkerDetails(res.data)
       }).catch(err=>{
@@ -130,7 +133,8 @@ export default function AdminTable() {
       })
     }
     
-  },[])
+  },[blocserach])
+
 
   const rows = workerDetails?.map(ele=>(
     createData(ele.designation,ele.qtyCompleted, ele.toachife , ele.rendement)

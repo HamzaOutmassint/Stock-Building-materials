@@ -112,7 +112,6 @@ export default function AllControlesTable({searchName,searchdate} ) {
   const [searchResult , setSearchResult] = React.useState([])
   
 
- 
   /*-------------------------get data of all workers-------------------------*/
  
   React.useEffect(()=>{
@@ -124,24 +123,19 @@ export default function AllControlesTable({searchName,searchdate} ) {
         console.error(err);
       })
     }else if (searchdate !=="" && searchName === "" ){
+      console.log(`hi 2 ${searchdate}`)
       axios.post("http://localhost/project_atlass/getControlerParDate.php",{date:searchdate}).then(res=>{
-        setWorkers(res.data)
-
-        const result = workers.filter((v,i) => {
-          return workers.map((val)=> val.idControler).indexOf(v.idControler) == i
+        const result = res.data.filter((v,i) => {
+          return res.data.map((val)=> val.idControler).indexOf(v.idControler) == i
         })
-
         setSearchResult(result)
-        
       }).catch(err=>{
         console.error(err);
       })
     }else if(searchName !== "" && searchdate ==="" ){
-     
       const regex = new RegExp(searchName.toLowerCase(), 'g');
       const search = workers.filter((ele) => ele.fullName.toLowerCase().match(regex));
       setSearchResult(search);
-      
     }
   },[searchName,searchdate])
 
@@ -149,11 +143,9 @@ export default function AllControlesTable({searchName,searchdate} ) {
 
   /*----------------------------show data workers in table-------------------- */
 
-  
     var rows = searchResult?.map(ele=>(
       createData(ele.fullName,ele.idCard, ele.phoneNum , ele.speciality, <NavLink to={`../DetailsPage#${ele.idControler}`} className="hover:underline decoration-solid hover:text-[#3471ff]">see more details</NavLink>)
     ));
-  
   
   /*-----------------------------------end------------------------------------*/
 

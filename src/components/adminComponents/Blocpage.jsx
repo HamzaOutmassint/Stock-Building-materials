@@ -3,7 +3,7 @@ import Nav from "./NavAdmin";
 import BlocTable from "./BlocTable"
 
 export default function BlocPage() {
-  const [searchnmame, setSearchname] = useState("");
+  const [searchNmame, setSearchName] = useState("");
   const [searchbloc, setSearchbloc] = useState("");
   return (
     <div>
@@ -16,7 +16,7 @@ export default function BlocPage() {
                 <input
                   className="bg-[#3C3D42] pl-2 h-9 rounded-xl sm:w-64  focus:outline none p-1 text-white text-xs"
                   type="text"
-                  onChange={(e) => setSearchname(e.target.value)}
+                  onChange={(e) => setSearchName(e.target.value)}
                   placeholder="Search for bloc ... "
                 />
               </div>
@@ -32,7 +32,7 @@ export default function BlocPage() {
               </div> */}
             </div>
           </section>
-          <BlocTable searchnmame={searchnmame}/>
+          <BlocTable searchnmame={searchNmame}/>
         </div>
       </div>
     </div>

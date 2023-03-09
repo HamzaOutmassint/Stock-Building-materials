@@ -25,11 +25,9 @@ export default function AllControlersPage() {
                 onChange={(e) => setSearchName(e.target.value)}
                 placeholder="Search for ..."
               />
-              
             </div>
             <div className="flex  items-center">
-            <input  type="month" id="start" name="start" min="2022-01" max={date} onChange={(e)=>setSearchdate(e.target.value)}  className="bg-[#3C3D42]  h-9 sm:w-60 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"/>
-
+              <input  type="month" id="start" name="start" min="2022-01" max={date} onChange={(e)=>setSearchdate(e.target.value)}  className="bg-[#3C3D42]  h-9 sm:w-60 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"/>
             </div>
           </div>
         </section>

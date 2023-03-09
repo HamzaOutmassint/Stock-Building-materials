@@ -40,10 +40,9 @@ function ControllerPage() {
 /////////////////////////////////////////////////////////////////////////////////////////get id of controler he had login ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
     const location = useLocation();
-
     const id = {id:parseInt(location.hash.slice(1))}
     useEffect(()=>{
-        axios.post("http://localhost/project_atlass/getControlerInfo.php",id).then((res)=>{
+        axios.post("http://localhost/project_atlass/getControler.php",id).then((res)=>{
             setFullName(res.data.fullName)
             setSpeciality(res.data.speciality)
         }).catch((err)=>{

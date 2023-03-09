@@ -9,9 +9,7 @@ export default function Nav({fullName , speciality}) {
   const Logout=()=>{
     localStorage.removeItem("WorkerToken")
     localStorage.removeItem("id")
-    
-    
-}
+  }
 
   return (
     <div className="p-4 relative ">

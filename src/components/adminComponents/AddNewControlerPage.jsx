@@ -73,7 +73,6 @@ export default function AddNewControler() {
     e.preventDefault();
     await axios.post("http://localhost/project_atlass/addControler.php",{dataControler:dataControler , dataLogin:dataLogin})
     .then((res)=>{
-      console.log(res.data)
       setDataReturn(res.data)
     }).catch((err)=>{
       console.log(err)

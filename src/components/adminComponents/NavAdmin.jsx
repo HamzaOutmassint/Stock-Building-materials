@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import { useState , useEffect } from "react";
 import Navcontr from "../../assets/Navcontr.png";
 import setting from "../../assets/setting.png";
 import logout from "../../assets/logout.png";
 import user from "../../assets/user.png";
 import adduser from "../../assets/add-user.png";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-export default function Nav() {
+export default function Nav({reloadInChanges}) {
   const [show, setShow] = useState(false);
+  const [adminInfo , setAdminInfo] = useState([])
+
+  useEffect(()=>{
+    axios.get('http://localhost/project_atlass/getAdminInfo.php').then((response) => {
+        setAdminInfo(response.data)
+      }).catch((error)=> {
+        console.log(error);
+      });
+  },[reloadInChanges])
 
   return (
     <div className="p-2 relative ">
@@ -21,7 +31,13 @@ export default function Nav() {
             />
           </div>
           <div className="flex flex-col text-white">
-            <span className="font-mono font-bold ">Salaheddine elfatimi</span>
+            {
+            adminInfo.length > 0
+            ?
+            <span className="font-mono font-bold ">{`${adminInfo[0]["ferst_name"]} ${adminInfo[0]["last_name"]}`}</span>
+            :
+            <span className="font-mono font-bold ">...</span>
+            }
             <span className="font-mono font-thin ">Responsible</span>
           </div>
         </div>

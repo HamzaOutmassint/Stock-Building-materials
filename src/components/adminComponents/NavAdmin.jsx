@@ -30,22 +30,22 @@ export default function Nav() {
             <img src={setting} alt="" className="w-12 " />
           </button>
           <div
-            className={`absolute right-10 -bottom-40   bg-[#4C4D53] py-6 rounded-lg z-40  ${
+            className={`absolute right-10 sm:-bottom-40 -bottom-36   bg-[#4C4D53] py-6 rounded-lg z-40  ${
               show == false ? "hidden" : "block"
             }`}
           >
             <NavLink to="../MyAccount" className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={user} alt="" className="w-6" />
-              <span className="text-center font-mono font-bold text-white text-xl">My Account</span>
+              <span className="text-center font-mono font-bold text-white sm:text-xl">My Account</span>
             </NavLink>
             
             <NavLink to={"../AddNewControler"} className="flex items-center gap-2 px-6 py-1 mb-1 hover:bg-[#696b73]">
               <img src={adduser} alt="" className="w-6" />
-              <span className="text-center font-mono font-bold text-white text-xl">Add new controler</span>
+              <span className="text-center font-mono font-bold text-white sm:text-xl">Add new controler</span>
             </NavLink>
             <a href="/" onClick={()=>localStorage.removeItem("AdminToken")} className="flex items-center gap-2 px-6 py-1 hover:bg-[#696b73]">
               <img src={logout} alt="" className="w-6" />
-              <span className="text-center font-mono font-bold text-white text-xl">Logout</span>
+              <span className="text-center font-mono font-bold text-white sm:text-xl">Logout</span>
             </a>
           </div>
         </div>

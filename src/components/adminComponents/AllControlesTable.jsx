@@ -140,9 +140,16 @@ export default function AllControlesTable({searchName,searchdate} ) {
       setSearchResult(search);
       
     }else if (searchName !== "" && searchdate !==""){
+      axios.post("http://localhost/project_atlass/getControlerParDate.php",{date:searchdate}).then(res=>{
+        
       const regex = new RegExp(searchName.toLowerCase(), 'g');
-      const search = searchResult.filter((ele) => ele.fullName.toLowerCase().match(regex));
+      const search = res.data.filter((ele) => ele.fullName.toLowerCase().match(regex));
       setSearchResult(search);
+     
+    }).catch(err=>{
+      console.error(err);
+    })
+     
 
     }
   },[searchName,searchdate])

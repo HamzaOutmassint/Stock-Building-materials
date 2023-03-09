@@ -5,6 +5,7 @@ import AddNewControler from "./components/adminComponents/AddNewControlerPage"
 import DetailsPage from "./components/adminComponents/DetailsPage"
 import BlocPage from "./components/adminComponents/BlocPage"
 import AllControlersPage from "./components/adminComponents/AllControlersPage";
+import MyAccount from "./components/adminComponents/MyAccount";
 export default () => {
   return (
     <div>
@@ -16,6 +17,7 @@ export default () => {
           <Route path="/AddNewControler" element={<AddNewControler />} />
           <Route path="/DetailsPage" element={<DetailsPage />} />
           <Route path="/Blocpage" element={<BlocPage />} />
+          <Route path="/MyAccount" element={<MyAccount/>} />
         </Routes>
       </div>
     </div>

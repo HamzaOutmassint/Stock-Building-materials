@@ -39,10 +39,10 @@ export default function DetailsPage() {
     <div>
       <Nav />
       <div className="p-2">
-        <section className="pb-2 flex flex-col md:items-center space-y-4 md:space-y-0 md:flex-row md:justify-between gap-2">
-          <div className="flex items-center gap-6">
+        <section className="pb-2 flex flex-col md:items-center space-y-1 md:space-y-0 md:flex-row md:justify-between gap-2">
+          <div className="flex items-center gap-4">
             <div className={blocName!==null ? "hidden":""}>
-              <select defaultValue="all_bloc" style={ searchdate !==""  ? {"pointerEvents":"none"} : null} onChange={(e) => setSearchbloc(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs ">
+              <select defaultValue="all_bloc"  onChange={(e) => setSearchbloc(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs ">
                 <option value=''>All Bloc</option>
                 {
                   workerDetails?.map((ele,index)=>(
@@ -52,7 +52,7 @@ export default function DetailsPage() {
               </select>
             </div>
             <div className="flex gap-4 items-center">
-            <input style={ searchbloc !==""  ? {"pointerEvents":"none"} : null} type="month" id="start" name="start" min="2022-01" max={date} onChange={(e)=>setSearchdate(e.target.value)}  className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"/>
+            <input  type="month" id="start" name="start" min="2022-01" max={date} onChange={(e)=>setSearchdate(e.target.value)}  className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"/>
             </div>
           </div>
           <div>

@@ -134,9 +134,16 @@ export default function AdminTable(props) {
       setWorkerDetails(res.data)
       }).catch(err=>{
         console.error(err)
-      })
-    }else if(datesearch!=="" ){
+      }) 
+    }else if(datesearch!=="" && blocName === ""  ){
       axios.post("http://localhost/project_atlass/detailsBlocDate.php",parameterSendDate).then(res=>{
+        setWorkerDetails(res.data)
+       
+        }).catch(err=>{
+          console.error(err)
+        })
+    }else if (datesearch!=="" && blocName !== "" ){
+      axios.post("http://localhost/project_atlass/detailsParBlocAndDate.php",parameterSend).then(res=>{
         setWorkerDetails(res.data)
        
         }).catch(err=>{
@@ -145,7 +152,7 @@ export default function AdminTable(props) {
     }
  
   
-  },[blocserach,datesearch])
+  },[blocName,datesearch])
 
 
   const rows = workerDetails?.map(ele=>(

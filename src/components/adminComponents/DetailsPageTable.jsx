@@ -122,19 +122,25 @@ export default function AdminTable(props) {
   const parameterSendDate = {id:id ,date:datesearch}
  
   React.useEffect(()=>{
-   
+   //------------------------------ if not serach found ---------------------------------------------------------
     if(blocName === ""  && datesearch===""  ){
       axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
         setWorkerDetails(res.data)
       }).catch(err=>{
         console.error(err)
       })
+    //-----------------------------------------------------------------------------------------------------------
+
+    //-------------------------------- if bloc found will search by bloc ----------------------------------------
     }else if(blocName !== "" && datesearch===""  ) {
       axios.post("http://localhost/project_atlass/detailsBloc.php",parameterSend).then(res=>{
       setWorkerDetails(res.data)
       }).catch(err=>{
         console.error(err)
       }) 
+    //-----------------------------------------------------------------------------------------------------------
+
+    //-------------------------------- if date found will search by date -----------------------------------------
     }else if(datesearch!=="" && blocName === ""  ){
       axios.post("http://localhost/project_atlass/detailsBlocDate.php",parameterSendDate).then(res=>{
         setWorkerDetails(res.data)
@@ -142,6 +148,9 @@ export default function AdminTable(props) {
         }).catch(err=>{
           console.error(err)
         })
+    //--------------------------------------------------------------------------------------------------------------
+
+    //-------------------------------- if bloc and date  found will search by bloc and date -------------------------
     }else if (datesearch!=="" && blocName !== "" ){
       axios.post("http://localhost/project_atlass/detailsParBlocAndDate.php",parameterSend).then(res=>{
         setWorkerDetails(res.data)
@@ -150,15 +159,16 @@ export default function AdminTable(props) {
           console.error(err)
         })
     }
- 
+    //----------------------------------------------------------------------------------------
   
+ 
   },[blocName,datesearch])
 
-
+   //--------------------------------------------  map with data is came feom use state -----------------------------------------
   const rows = workerDetails?.map(ele=>(
     createData(ele.designation,ele.qtyCompleted, ele.toachife , ele.rendement)
   ));
-  
+  //-------------------------------------------------------------------------------------------------------------------------------
   
   /*---------------------------------------------------------------------- */
     //       all this is for datatable don't change anything here        //

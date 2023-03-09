@@ -110,7 +110,7 @@ EnhancedTableHead.propTypes = {
 export default function AllControlesTable({searchName,searchdate} ) {
   const [workers , setWorkers]= React.useState([])
   const [searchResult , setSearchResult] = React.useState([])
-  
+ 
 
  
   /*-------------------------get data of all workers-------------------------*/
@@ -125,10 +125,10 @@ export default function AllControlesTable({searchName,searchdate} ) {
       })
     }else if (searchdate !=="" && searchName === "" ){
       axios.post("http://localhost/project_atlass/getControlerParDate.php",{date:searchdate}).then(res=>{
-        setWorkers(res.data)
+        
 
-        const result = workers.filter((v,i) => {
-          return workers.map((val)=> val.idControler).indexOf(v.idControler) == i
+        const result = res.data.filter((v,i) => {
+          return res.data.map((val)=> val.idControler).indexOf(v.idControler) == i
         })
 
         setSearchResult(result)
@@ -142,6 +142,11 @@ export default function AllControlesTable({searchName,searchdate} ) {
       const search = workers.filter((ele) => ele.fullName.toLowerCase().match(regex));
       setSearchResult(search);
       
+    }else if (searchName !== "" && searchdate !==""){
+      const regex = new RegExp(searchName.toLowerCase(), 'g');
+      const search = searchResult.filter((ele) => ele.fullName.toLowerCase().match(regex));
+      setSearchResult(search);
+
     }
   },[searchName,searchdate])
 

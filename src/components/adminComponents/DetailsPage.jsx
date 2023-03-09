@@ -15,6 +15,7 @@ export default function DetailsPage() {
   const [searchbloc, setSearchbloc] = useState("");
   const [workerDetails , setWorkerDetails] = React.useState([])
   const location = useLocation();
+  
  
   const id = {id:parseInt(location.hash.slice(1))}
   const blocName = new URLSearchParams(location.search).get('bloc')
@@ -27,6 +28,11 @@ export default function DetailsPage() {
       console.error(err)
     })
   },[])
+  var curenteDate = new Date();
+  
+  const month = curenteDate.getMonth()<10?`0${curenteDate.getMonth()+1}`:curenteDate.getMonth()+1
+  const year = curenteDate.getFullYear()
+  const date=year+"-"+month
 
 
   return (
@@ -36,8 +42,8 @@ export default function DetailsPage() {
         <section className="pb-2 flex flex-col md:items-center space-y-4 md:space-y-0 md:flex-row md:justify-between gap-2">
           <div className="flex items-center gap-6">
             <div className={blocName!==null ? "hidden":""}>
-              <select defaultValue="all_bloc" onChange={(e) => setSearchbloc(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs ">
-                <option value='all_bloc'>All Bloc</option>
+              <select defaultValue="all_bloc" style={ searchdate !==""  ? {"pointerEvents":"none"} : null} onChange={(e) => setSearchbloc(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs ">
+                <option value=''>All Bloc</option>
                 {
                   workerDetails?.map((ele,index)=>(
                     <option value={ele.blocName} key={index}>{ele.blocName}</option>
@@ -46,17 +52,7 @@ export default function DetailsPage() {
               </select>
             </div>
             <div className="flex gap-4 items-center">
-              <select defaultValue="all_date" onChange={(e) => setSearchdate(e.target.value)} className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs">
-                <option value="all_date">All date</option>
-                {
-                  workerDetails?.map((ele,index)=>(
-                    
-                    <option value={ele.dateValidation} key={index}>{ele.dateValidation}</option>
-
-                  ))
-
-                }
-              </select>
+            <input style={ searchbloc !==""  ? {"pointerEvents":"none"} : null} type="month" id="start" name="start" min="2022-01" max={date} onChange={(e)=>setSearchdate(e.target.value)}  className="bg-[#3C3D42] p-3  h-9 sm:w-64 text-center rounded-xl font-mono  font-medium focus:outline none  text-white text-xs"/>
             </div>
           </div>
           <div>
@@ -95,7 +91,7 @@ export default function DetailsPage() {
             </div>
           </div>
         </section>
-        <DetailsPageTable searchbloc={searchbloc}/>
+        <DetailsPageTable searchbloc={searchbloc}  searchdate={searchdate}/>
       </div>
     </div>
   );

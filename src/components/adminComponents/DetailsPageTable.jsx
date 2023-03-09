@@ -108,37 +108,50 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AdminTable(searchbloc) {
- const blocserach=searchbloc.searchbloc
+export default function AdminTable(props) {
+ const blocserach=props.searchbloc
+ const datesearch = props.searchdate
+
   const location = useLocation();
   const [workerDetails , setWorkerDetails] = React.useState([])
 
   const id = {id:parseInt(location.hash.slice(1))}
   const blocName = new URLSearchParams(location.search).get('bloc')===null ? blocserach : new URLSearchParams(location.search).get('bloc') ;
  
-  const parameterSend = {id:id , blocName:blocName}
+  const parameterSend = {id:id , blocName:blocName , date:datesearch}
+  const parameterSendDate = {id:id ,date:datesearch}
  
   React.useEffect(()=>{
-    if(blocName === null || blocserach==="" || blocserach==="all_bloc"){
+   
+    if(blocName === ""  && datesearch===""  ){
       axios.post("http://localhost/project_atlass/detailsControler.php",id).then(res=>{
         setWorkerDetails(res.data)
       }).catch(err=>{
         console.error(err)
       })
-    }else if(blocserach!=="" && blocserach!=="all_bloc"){
+    }else if(blocName !== "" && datesearch===""  ) {
       axios.post("http://localhost/project_atlass/detailsBloc.php",parameterSend).then(res=>{
       setWorkerDetails(res.data)
       }).catch(err=>{
         console.error(err)
       })
+    }else if(datesearch!=="" ){
+      axios.post("http://localhost/project_atlass/detailsBlocDate.php",parameterSendDate).then(res=>{
+        setWorkerDetails(res.data)
+       
+        }).catch(err=>{
+          console.error(err)
+        })
     }
-    
-  },[blocserach])
+ 
+  
+  },[blocserach,datesearch])
 
 
   const rows = workerDetails?.map(ele=>(
     createData(ele.designation,ele.qtyCompleted, ele.toachife , ele.rendement)
   ));
+  
   
   /*---------------------------------------------------------------------- */
     //       all this is for datatable don't change anything here        //

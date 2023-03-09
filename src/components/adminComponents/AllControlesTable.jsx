@@ -107,26 +107,43 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function AllControlesTable({searchName} ) {
+export default function AllControlesTable({searchName,searchdate} ) {
   const [workers , setWorkers]= React.useState([])
   const [searchResult , setSearchResult] = React.useState([])
+  
 
+ 
   /*-------------------------get data of all workers-------------------------*/
  
   React.useEffect(()=>{
-    if(searchName === ""){
+    if(searchName === "" && searchdate===""){
       axios.get("http://localhost/project_atlass/getWorkers.php").then(res=>{
         setWorkers(res.data)
         setSearchResult(res.data)
       }).catch(err=>{
         console.error(err);
       })
-    }else if(searchName !== ""){
+    }else if (searchdate !=="" && searchName === "" ){
+      axios.post("http://localhost/project_atlass/getControlerParDate.php",{date:searchdate}).then(res=>{
+        setWorkers(res.data)
+
+        const result = workers.filter((v,i) => {
+          return workers.map((val)=> val.idControler).indexOf(v.idControler) == i
+        })
+
+        setSearchResult(result)
+        
+      }).catch(err=>{
+        console.error(err);
+      })
+    }else if(searchName !== "" && searchdate ==="" ){
+     
       const regex = new RegExp(searchName.toLowerCase(), 'g');
       const search = workers.filter((ele) => ele.fullName.toLowerCase().match(regex));
       setSearchResult(search);
+      
     }
-  },[searchName])
+  },[searchName,searchdate])
 
   /*-----------------------------------end------------------------------------*/
 

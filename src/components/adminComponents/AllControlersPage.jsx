@@ -34,7 +34,7 @@ export default function AllControlersPage() {
           </div>
         </section>
         <div className=" ">
-          <AllControlesTable searchName={searchName}  />
+          <AllControlesTable searchName={searchName} searchdate={searchdate}  />
         </div>
       </div>
     </div>

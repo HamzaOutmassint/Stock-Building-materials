@@ -22,13 +22,21 @@ export default function AddNewControler() {
   };
    /*-------------------------end-----------------------------*/
 
+
+   var curenteDate = new Date();
+   const day=curenteDate.getDate()<10?`0${curenteDate.getDate()}`:curenteDate.getDate()
+   const month = curenteDate.getMonth()<10?`0${curenteDate.getMonth()+1}`:curenteDate.getMonth()+1
+   const year = curenteDate.getFullYear()
+   const date=year+"/"+month+"/"+day
+
   const [dataControler , setDataControler] = useState({
     fullName:"",
     idCard:"",
     address:"",
     specialty:"",
     phoneNumber:"",
-    email:""
+    email:"",
+    dateStart:date
   })
   const [nextStep , setNextStep]=useState(false)
 

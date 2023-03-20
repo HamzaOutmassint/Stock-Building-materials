@@ -96,7 +96,7 @@ export default function DetailsPage() {
                   <div className="flex gap-2 items-center">
                     <WorkHistoryIcon style={{'fontSize':"25px","marginRight":"5px","color":"#fff"}}/>
                     <span className="font-mono  text-white">
-                    <span className="font-semibold">Time start work:</span>  {workerDetails[0]?.dateStart}
+                    <span className="font-semibold">Date start work:</span>  {workerDetails[0]?.dateStart}
                     </span>
                   </div>
                 </div>

@@ -13,7 +13,7 @@ function SpecialCase({who}) {
     const WorkerLogout=()=>{
         localStorage.removeItem("WorkerToken")
         localStorage.removeItem("id")
-        navigate("/")
+         navigate("/")
         window.location.reload()
     }
     return (
